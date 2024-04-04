@@ -1,0 +1,62 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output
+.nuxt/
+dist/
+
+# Ignore development server files
+.nuxtignore
+.nuxtignore.js
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore logs and debugging files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+*.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore environment-specific files
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore generated static files
+static/
+
+# Ignore backup files
+*.bak
+*.swp
+*~
+
+# Ignore cache and temporary files
+.cache/
+.tmp/
+
+# Ignore test and coverage files
+coverage/
+
+# Ignore dependency lock files
+package-lock.json
+yarn.lock
+
+# Ignore compiled files
+*.min.js
+*.min.css
+
+# Ignore miscellaneous files
+*.bak
+*.swp
+*~
