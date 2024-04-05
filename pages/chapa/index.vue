@@ -3,12 +3,12 @@
     <v-row>
       <v-col cols="12">
         <v-autocomplete
-        :items="partidos"
-        item-title="nome"
-        item-value="valor"
-        label="Escolha um partido"
-        v-model="partidoSelecionado"
-      ></v-autocomplete>
+          :items="partidos"
+          item-title="nome"
+          item-value="valor"
+          label="Escolha um partido"
+          v-model="partidoSelecionado"
+        ></v-autocomplete>
       </v-col>
     </v-row>
     <v-row>
@@ -17,89 +17,126 @@
       </v-col>
     </v-row>
     <v-row id="partidos">
-      <v-col cols="12" sm="6" md="4" v-for="(chapa, index) in chapasCriadas" :key="index">
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+        v-for="(chapa, index) in chapasCriadas"
+        :key="index"
+      >
         <v-card>
           <v-img :src="chapa.logo" height="200px"></v-img>
           <v-card-title>{{ chapa.nome }}</v-card-title>
         </v-card>
       </v-col>
+      <v-expansion-panels>
+        <v-expansion-panel v-for="i in 3" :key="i" text="">
+          <v-expansion-panel-title v-slot="">
+            <NuxtImg src="/partido/MDB.png" height="35" densities="x1 x2" />
+            <h3 class="ml-2">5.600 votos na chapa do MDB</h3>
+            <v-chip prepend-icon="mdi-account-tie" color="primary" class="ml-6"
+              >8 pessoas</v-chip
+            >
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row justify="space-around" no-gutters>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-row>
   </v-container>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+  import { ref } from 'vue'
 
-const partidos = [
-  { nome: 'MDB - 15', valor: 'MDB', logo: '/partido/MDB.png' },
-  { nome: 'PT - 13', valor: 'PT', logo: '/partido/PT.png' },
-  { nome: 'PRD - 25', valor: 'PRD', logo: '/partido/PRD.png' },
-  { nome: 'PSDB - 45', valor: 'PSDB', logo: '/partido/PSDB.png' },
-  { nome: 'PP - 11', valor: 'PP', logo: '/partido/PP.png' },
-  { nome: 'PDT - 12', valor: 'PDT', logo: '/partido/PDT.png' },
-  { nome: 'UNIÃO - 44', valor: 'UNIÃO', logo: '/partido/UNIÃO.png' },
-  { nome: 'PL - 22', valor: 'PL', logo: '/partido/PL.png' },
-  { nome: 'PODE - 20', valor: 'PODE', logo: '/partido/PODE.png' },
-  { nome: 'PSB - 40', valor: 'PSB', logo: '/partido/PSB.png' },
-  { nome: 'REPUBLICANOS - 10', valor: 'REPUBLICANOS', logo: '/partido/REPUBLICANOS.png' },
-  { nome: 'CIDADANIA - 23', valor: 'CIDADANIA', logo: '/partido/CIDADANIA.png' },
-  { nome: 'PSD - 55', valor: 'PSD', logo: '/partido/PSD.png' },
-  { nome: 'PCdoB - 65', valor: 'PCdoB', logo: '/partido/PCdoB.png' },
-  { nome: 'SOLIDARIEDADE - 77', valor: 'SOLIDARIEDADE', logo: '/partido/SOLIDARIEDADE.png' },
-  { nome: 'PV - 43', valor: 'PV', logo: '/partido/PV.png' },
-  { nome: 'PSOL - 50', valor: 'PSOL', logo: '/partido/PSOL.png' },
-  { nome: 'AVANTE - 70', valor: 'AVANTE', logo: '/partido/AVANTE.png' },
-  { nome: 'MOBILIZA - 33', valor: 'MOBILIZA', logo: '/partido/MOBILIZA.png' },
-  { nome: 'AGIR - 36', valor: 'AGIR', logo: '/partido/AGIR.png' },
-  { nome: 'DC - 27', valor: 'DC', logo: '/partido/DC.png' },
-  { nome: 'PRTB - 28', valor: 'PRTB', logo: '/partido/PRTB.png' },
-  { nome: 'PMB - 35', valor: 'PMB', logo: '/partido/PMB.png' },
-  { nome: 'NOVO - 30', valor: 'NOVO', logo: '/partido/NOVO.png' },
-  { nome: 'REDE - 18', valor: 'REDE', logo: '/partido/REDE.png' },
-  { nome: 'PSTU - 16', valor: 'PSTU', logo: '/partido/PSTU.png' },
-  { nome: 'PCB - 21', valor: 'PCB', logo: '/partido/PCB.png' },
-  { nome: 'UP - 80', valor: 'UP', logo: '/partido/UP.png' },
-  { nome: 'PCO - 29', valor: 'PCO', logo: '/partido/PCO.png' },
-];
+  const partidos = [
+    { nome: 'MDB - 15', valor: 'MDB', logo: '/partido/MDB.png' },
+    { nome: 'PT - 13', valor: 'PT', logo: '/partido/PT.png' },
+    { nome: 'PRD - 25', valor: 'PRD', logo: '/partido/PRD.png' },
+    { nome: 'PSDB - 45', valor: 'PSDB', logo: '/partido/PSDB.png' },
+    { nome: 'PP - 11', valor: 'PP', logo: '/partido/PP.png' },
+    { nome: 'PDT - 12', valor: 'PDT', logo: '/partido/PDT.png' },
+    { nome: 'UNIÃO - 44', valor: 'UNIÃO', logo: '/partido/UNIÃO.png' },
+    { nome: 'PL - 22', valor: 'PL', logo: '/partido/PL.png' },
+    { nome: 'PODE - 20', valor: 'PODE', logo: '/partido/PODE.png' },
+    { nome: 'PSB - 40', valor: 'PSB', logo: '/partido/PSB.png' },
+    {
+      nome: 'REPUBLICANOS - 10',
+      valor: 'REPUBLICANOS',
+      logo: '/partido/REPUBLICANOS.png',
+    },
+    {
+      nome: 'CIDADANIA - 23',
+      valor: 'CIDADANIA',
+      logo: '/partido/CIDADANIA.png',
+    },
+    { nome: 'PSD - 55', valor: 'PSD', logo: '/partido/PSD.png' },
+    { nome: 'PCdoB - 65', valor: 'PCdoB', logo: '/partido/PCdoB.png' },
+    {
+      nome: 'SOLIDARIEDADE - 77',
+      valor: 'SOLIDARIEDADE',
+      logo: '/partido/SOLIDARIEDADE.png',
+    },
+    { nome: 'PV - 43', valor: 'PV', logo: '/partido/PV.png' },
+    { nome: 'PSOL - 50', valor: 'PSOL', logo: '/partido/PSOL.png' },
+    { nome: 'AVANTE - 70', valor: 'AVANTE', logo: '/partido/AVANTE.png' },
+    { nome: 'MOBILIZA - 33', valor: 'MOBILIZA', logo: '/partido/MOBILIZA.png' },
+    { nome: 'AGIR - 36', valor: 'AGIR', logo: '/partido/AGIR.png' },
+    { nome: 'DC - 27', valor: 'DC', logo: '/partido/DC.png' },
+    { nome: 'PRTB - 28', valor: 'PRTB', logo: '/partido/PRTB.png' },
+    { nome: 'PMB - 35', valor: 'PMB', logo: '/partido/PMB.png' },
+    { nome: 'NOVO - 30', valor: 'NOVO', logo: '/partido/NOVO.png' },
+    { nome: 'REDE - 18', valor: 'REDE', logo: '/partido/REDE.png' },
+    { nome: 'PSTU - 16', valor: 'PSTU', logo: '/partido/PSTU.png' },
+    { nome: 'PCB - 21', valor: 'PCB', logo: '/partido/PCB.png' },
+    { nome: 'UP - 80', valor: 'UP', logo: '/partido/UP.png' },
+    { nome: 'PCO - 29', valor: 'PCO', logo: '/partido/PCO.png' },
+  ]
 
+  const partidoSelecionado = ref(null)
+  const chapasCriadas = ref([])
 
-const partidoSelecionado = ref(null);
-const chapasCriadas = ref([]);
+  const criarChapa = () => {
+    console.log('Partido selecionado:', partidoSelecionado.value)
 
-const criarChapa = () => {
-  console.log("Partido selecionado:", partidoSelecionado.value);
+    if (!partidoSelecionado.value) {
+      alert('Por favor, selecione um partido.')
+      return
+    }
 
-  if (!partidoSelecionado.value) {
-    alert('Por favor, selecione um partido.');
-    return;
+    const partidoDetalhes = partidos.find(
+      (partido) => partido.valor === partidoSelecionado.value
+    )
+
+    if (!partidoDetalhes) {
+      console.log('Não foram encontrados detalhes para o partido selecionado.')
+      return
+    }
+
+    console.log(
+      `Detalhes do partido selecionado: Nome: ${partidoDetalhes.nome}, Valor: ${partidoDetalhes.valor}, Logo: ${partidoDetalhes.logo}`
+    )
+
+    const chapaExiste = chapasCriadas.value.some(
+      (chapa) => chapa.valor === partidoDetalhes.valor
+    )
+
+    if (!chapaExiste) {
+      chapasCriadas.value.push(partidoDetalhes)
+      console.log('Chapa adicionada com sucesso:', partidoDetalhes)
+      partidoSelecionado.value = null
+    } else {
+      console.log(
+        'Tentativa de adicionar chapa duplicada para:',
+        partidoDetalhes
+      )
+      alert('Uma chapa para este partido já foi criada.')
+    }
   }
-
-  // Assumindo que partidoSelecionado.value é apenas a sigla do partido (e.g., 'MDB')
-  // e que precisamos encontrar os detalhes completos do partido a partir do array partidos
-  const partidoDetalhes = partidos.find(partido => partido.valor === partidoSelecionado.value);
-
-  if (!partidoDetalhes) {
-    console.log("Não foram encontrados detalhes para o partido selecionado.");
-    return;
-  }
-
-  console.log(`Detalhes do partido selecionado: Nome: ${partidoDetalhes.nome}, Valor: ${partidoDetalhes.valor}, Logo: ${partidoDetalhes.logo}`);
-
-  // Verifica se já existe uma chapa para o partido
-  const chapaExiste = chapasCriadas.value.some(chapa => chapa.valor === partidoDetalhes.valor);
-
-  if (!chapaExiste) {
-    chapasCriadas.value.push(partidoDetalhes); // Adicionando o partido com detalhes completos
-    console.log("Chapa adicionada com sucesso:", partidoDetalhes);
-    partidoSelecionado.value = null; // Resetando a seleção do partido
-  } else {
-    console.log("Tentativa de adicionar chapa duplicada para:", partidoDetalhes);
-    alert('Uma chapa para este partido já foi criada.');
-  }
-};
-
-
-
-
-
 </script>
