@@ -19,26 +19,19 @@
       </v-col>
     </v-row>
     <v-row id="partidos">
-      <v-col
-        cols="12"
-        sm="6"
-        md="4"
-        v-for="(chapa, index) in chapasCriadas"
-        :key="index"
-      >
-        <v-card>
-          <v-img :src="chapa.logo" height="200px"></v-img>
-          <v-card-title>{{ chapa.nome }}</v-card-title>
-        </v-card>
-      </v-col>
       <v-expansion-panels>
-        <v-expansion-panel v-for="i in 3" :key="i" text="">
+        <v-expansion-panel v-for="(chapa, index) in chapasCriadas" :key="index">
           <v-expansion-panel-title>
             <v-row align-self="center">
               <v-col cols="8" class="d-flex align-center">
-                <NuxtImg src="/partido/MDB.png" height="35" densities="x1 x2" />
+                <NuxtImg
+                  :src="chapa.logo"
+                  :alt="chapa.nome"
+                  height="35"
+                  densities="x1 x2"
+                />
                 <h3 class="ml-2 mb-0">5.600</h3>
-                <span class="ml-1">votos do MDB</span>
+                <span class="ml-1">votos do {{ chapa.valor }}</span>
               </v-col>
               <v-col cols="4" class="d-flex justify-end">
                 <v-chip
