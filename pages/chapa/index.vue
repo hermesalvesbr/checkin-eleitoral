@@ -1,19 +1,21 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
+    <v-row align-self="center" no-gutters>
+      <v-col cols="7">
         <v-autocomplete
+          density="comfortable"
           :items="partidos"
           item-title="nome"
           item-value="valor"
           label="Escolha um partido"
           v-model="partidoSelecionado"
+          class="pt-2"
         ></v-autocomplete>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <v-btn color="primary" @click="criarChapa">Criar Chapa</v-btn>
+      <v-col cols="5" class="d-flex justify-end">
+        <v-btn color="primary" @click="criarChapa" class="my-auto"
+          >Criar Chapa</v-btn
+        >
       </v-col>
     </v-row>
     <v-row id="partidos">
@@ -31,12 +33,22 @@
       </v-col>
       <v-expansion-panels>
         <v-expansion-panel v-for="i in 3" :key="i" text="">
-          <v-expansion-panel-title v-slot="">
-            <NuxtImg src="/partido/MDB.png" height="35" densities="x1 x2" />
-            <h3 class="ml-2">5.600 votos na chapa do MDB</h3>
-            <v-chip prepend-icon="mdi-account-tie" color="primary" class="ml-6"
-              >8 pessoas</v-chip
-            >
+          <v-expansion-panel-title>
+            <v-row align-self="center">
+              <v-col cols="8" class="d-flex align-center">
+                <NuxtImg src="/partido/MDB.png" height="35" densities="x1 x2" />
+                <h3 class="ml-2 mb-0">5.600</h3>
+                <span class="ml-1">votos do MDB</span>
+              </v-col>
+              <v-col cols="4" class="d-flex justify-end">
+                <v-chip
+                  prepend-icon="mdi-account-tie"
+                  color="primary"
+                  class="mr-6"
+                  >8</v-chip
+                >
+              </v-col>
+            </v-row>
           </v-expansion-panel-title>
           <v-expansion-panel-text>
             <v-row justify="space-around" no-gutters>
