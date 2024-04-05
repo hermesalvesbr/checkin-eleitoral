@@ -1,6 +1,5 @@
 # Ignore node_modules directory
 node_modules/
-
 # Ignore build output
 .nuxt/
 dist/
@@ -32,7 +31,7 @@ Thumbs.db
 .env.development.local
 .env.test.local
 .env.production.local
-
+.env
 # Ignore generated static files
 static/
 
@@ -60,3 +59,6 @@ yarn.lock
 *.bak
 *.swp
 *~
+# Ignore .env files
+.env
+.env.*

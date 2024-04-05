@@ -13,7 +13,7 @@ import {
 } from '@directus/sdk'
 import useUtils from './useUtils'
 
-class usePublicDirectus {
+class useDirectus {
   directus: any
   config: any = useRuntimeConfig()
   utils: any = new useUtils()
@@ -174,26 +174,6 @@ class usePublicDirectus {
       console.error(error)
     }
   }
-
-  async funcaoServidor(carga_horaria: number) {
-    try {
-      const filter = {
-        carga_horaria: {
-          _eq: carga_horaria,
-        },
-      }
-      const query = {
-        filter: filter,
-      }
-      const [servidor_funcao] = await this.getItems('servidor_funcao', query)
-      if (servidor_funcao?.id?.length === 0) {
-        return null
-      }
-      return servidor_funcao
-    } catch (error) {
-      console.error(error)
-    }
-  }
   async emailExists(email: string): Promise<boolean> {
     if (!email) return false
     try {
@@ -237,4 +217,4 @@ class usePublicDirectus {
     }
   }
 }
-export default usePublicDirectus
+export default useDirectus
