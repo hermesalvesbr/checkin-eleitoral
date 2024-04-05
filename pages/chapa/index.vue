@@ -16,7 +16,7 @@
         <v-btn color="primary" @click="criarChapa">Criar Chapa</v-btn>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row id="partidos">
       <v-col cols="12" sm="6" md="4" v-for="(chapa, index) in chapasCriadas" :key="index">
         <v-card>
           <v-img :src="chapa.logo" height="200px"></v-img>
