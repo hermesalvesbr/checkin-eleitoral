@@ -34,10 +34,18 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="success" @click="adicionarPessoa()"
+              <v-btn
+                class="text-none ms-4 text-white"
+                color="primary"
+                variant="flat"
+                @click="adicionarPessoa()"
                 >Adicionar</v-btn
               >
-              <v-btn color="grey darken-1" @click="fecharDialogo()"
+              <v-btn
+                class="text-none ms-4 text-white"
+                color="secondary"
+                variant="flat"
+                @click="fecharDialogo()"
                 >Cancelar</v-btn
               >
             </v-card-actions>
