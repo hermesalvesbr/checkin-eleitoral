@@ -17,10 +17,10 @@
                 dense
               ></v-text-field>
               <v-text-field
+                id="votos"
                 v-model="novaPessoa.votos"
                 label="Quantidade de Votos"
                 type="number"
-                value="100"
                 outlined
                 dense
               ></v-text-field>
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
 
   interface Pessoa {
     nome: string
@@ -96,7 +96,7 @@
   ])
   const headers = ref([
     { title: 'Nome', align: 'start', value: 'nome' },
-    { title: 'Votos', align: 'start', value: 'votos', width: '120px' },
+    { title: 'Votos', align: 'start', value: 'votos', width: '130px' },
     { title: 'Add', align: 'start', value: 'add', width: '50px' },
   ])
   const dialog = ref(false)
@@ -128,6 +128,7 @@
   }, 1500)
 
   function abrirDialogoAdicionarPessoa() {
+    novaPessoa.value = { nome: '', votos: 100 }
     dialog.value = true
   }
 
