@@ -4,17 +4,24 @@
       <v-col cols="12">
         <v-dialog
           v-model="dialog"
-          transition="dialog-top-transition"
-          max-width="400px"
+          transition="dialog-bottom-transition"
+          max-width="400"
         >
           <v-card>
-            <v-toolbar dense flat>Adicionar Nova Pessoa</v-toolbar>
+            <v-toolbar color="primary" dark>
+              <v-toolbar-title>Nova Pessoa</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="fecharDialogo">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
             <v-card-text>
               <v-text-field
                 v-model="novaPessoa.nome"
                 label="Nome Completo"
                 outlined
                 dense
+                autofocus
               ></v-text-field>
               <v-text-field
                 id="votos"
@@ -27,10 +34,10 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="adicionarPessoa"
+              <v-btn color="success" @click="adicionarPessoa()"
                 >Adicionar</v-btn
               >
-              <v-btn color="grey darken-1" text @click="fecharDialogo"
+              <v-btn color="grey darken-1" @click="fecharDialogo()"
                 >Cancelar</v-btn
               >
             </v-card-actions>
@@ -90,11 +97,19 @@
     nome: string
     votos: number
   }
+  const props = defineProps<{
+    modelValue: Pessoa[]
+  }>()
+  const emit = defineEmits(['update:modelValue'])
+  const pessoas = ref<Pessoa[]>(props.modelValue)
+  watch(
+    pessoas,
+    (newValue) => {
+      emit('update:modelValue', newValue)
+    },
+    { deep: true }
+  )
 
-  const pessoas = ref<Pessoa[]>([
-    { nome: 'Hermes Alves', votos: 1500 },
-    { nome: 'João', votos: 234 },
-  ])
   const headers = ref([
     { title: 'Nome', align: 'start', value: 'nome', sortable: true },
     {
@@ -108,15 +123,7 @@
   ])
   const dialog = ref(false)
   const novaPessoa = ref<Pessoa>({ nome: '', votos: 0 })
-  const totalDeVotos = computed(() => {
-    return pessoas.value.reduce(
-      (total, pessoa) => total + Number(pessoa.votos),
-      0
-    )
-  })
-  const totalDePessoas = computed(() => {
-    return pessoas.value.length || 0
-  })
+
   // Debounce function
   function debounce(func: Function, wait: number) {
     let timeout: ReturnType<typeof setTimeout>
@@ -144,6 +151,10 @@
   }
 
   function adicionarPessoa() {
+    if (!novaPessoa.value.nome.trim()) {
+      alert('Por favor, preencha o nome da pessoa.')
+      return
+    }
     pessoas.value.push({ ...novaPessoa.value })
     ordenarPessoasPorVotos()
     novaPessoa.value = { nome: '', votos: 0 }

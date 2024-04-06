@@ -10,6 +10,7 @@
           label="Escolha um partido"
           v-model="partidoSelecionado"
           class="pt-2"
+          autocomplete="off"
         ></v-autocomplete>
       </v-col>
       <v-col cols="5" class="d-flex justify-end">
@@ -30,7 +31,7 @@
                   height="35"
                   densities="x1 x2"
                 />
-                <h3 class="ml-2 mb-0">5.600</h3>
+                <h3 class="ml-2 mb-0">{{ totalVotosChapa(chapa.pessoas) }}</h3>
                 <span class="ml-1">votos do {{ chapa.valor }}</span>
               </v-col>
               <v-col cols="4" class="d-flex justify-end">
@@ -38,13 +39,13 @@
                   prepend-icon="mdi-account-tie"
                   color="primary"
                   class="mr-6"
-                  >8</v-chip
+                  >{{ totalDePessoas(chapa.pessoas) }}</v-chip
                 >
               </v-col>
             </v-row>
           </v-expansion-panel-title>
           <v-expansion-panel-text>
-            <ChapaVereadores />
+            <ChapaVereadores v-model="chapa.pessoas" class="mt-n10" />
           </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -54,7 +55,17 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-
+  interface Pessoa {
+    nome: string
+    votos: number
+  }
+  interface Chapa {
+    nome: string
+    valor: string
+    logo: string
+    id: number // Adicionado um ID único
+    pessoas: Pessoa[] // Cada chapa tem seu próprio array de pessoas
+  }
   const partidos = [
     { nome: 'MDB - 15', valor: 'MDB', logo: '/partido/MDB.png' },
     { nome: 'PT - 13', valor: 'PT', logo: '/partido/PT.png' },
@@ -100,16 +111,13 @@
   ]
 
   const partidoSelecionado = ref(null)
-  const chapasCriadas = ref([])
-
+  const chapasCriadas = ref<Chapa[]>([])
+  let nextId = 0
   const criarChapa = () => {
-    console.log('Partido selecionado:', partidoSelecionado.value)
-
     if (!partidoSelecionado.value) {
       alert('Por favor, selecione um partido.')
       return
     }
-
     const partidoDetalhes = partidos.find(
       (partido) => partido.valor === partidoSelecionado.value
     )
@@ -119,17 +127,16 @@
       return
     }
 
-    console.log(
-      `Detalhes do partido selecionado: Nome: ${partidoDetalhes.nome}, Valor: ${partidoDetalhes.valor}, Logo: ${partidoDetalhes.logo}`
-    )
-
     const chapaExiste = chapasCriadas.value.some(
       (chapa) => chapa.valor === partidoDetalhes.valor
     )
 
     if (!chapaExiste) {
-      chapasCriadas.value.push(partidoDetalhes)
-      console.log('Chapa adicionada com sucesso:', partidoDetalhes)
+      chapasCriadas.value.push({
+        ...partidoDetalhes,
+        id: nextId++,
+        pessoas: [],
+      })
       partidoSelecionado.value = null
     } else {
       console.log(
@@ -138,5 +145,11 @@
       )
       alert('Uma chapa para este partido já foi criada.')
     }
+  }
+  function totalVotosChapa(pessoas: Pessoa[]) {
+    return pessoas.reduce((total, pessoa) => total + Number(pessoa.votos), 0)
+  }
+  function totalDePessoas(pessoas: Pessoa[]) {
+    return pessoas.length || 0
   }
 </script>
