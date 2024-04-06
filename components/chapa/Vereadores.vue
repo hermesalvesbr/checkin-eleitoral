@@ -44,6 +44,7 @@
       :items="pessoas"
       item-key="nome"
       density="compact"
+      class="titulo-negrito"
     >
       <template v-slot:header.add="{ column }">
         <v-btn
@@ -95,8 +96,14 @@
     { nome: 'João', votos: 234 },
   ])
   const headers = ref([
-    { title: 'Nome', align: 'start', value: 'nome' },
-    { title: 'Votos', align: 'start', value: 'votos', width: '130px' },
+    { title: 'Nome', align: 'start', value: 'nome', sortable: true },
+    {
+      title: 'Votos',
+      align: 'start',
+      value: 'votos',
+      width: '130px',
+      sortable: true,
+    },
     { title: 'Add', align: 'start', value: 'add', width: '50px' },
   ])
   const dialog = ref(false)
@@ -147,3 +154,17 @@
     pessoas.value.sort((a, b) => b.votos - a.votos)
   }
 </script>
+<style lang="scss">
+  .v-data-table-header__content {
+    font-weight: bold;
+  }
+  .v-data-table .v-table__wrapper > table tbody > tr:nth-of-type(odd) > td,
+  .v-data-table .v-table__wrapper > table tbody > tr:nth-of-type(odd) th {
+    background-color: #f5f5f5 !important;
+  }
+
+  .v-data-table .v-table__wrapper > table tbody > tr:nth-of-type(even) > td,
+  .v-data-table .v-table__wrapper > table tbody > tr:nth-of-type(even) th {
+    background-color: #f9faf4 !important;
+  }
+</style>

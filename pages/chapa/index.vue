@@ -44,9 +44,7 @@
             </v-row>
           </v-expansion-panel-title>
           <v-expansion-panel-text>
-            <v-row justify="space-around" no-gutters>
-              <ChapaVereadores />
-            </v-row>
+            <ChapaVereadores />
           </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -54,7 +52,7 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { ref } from 'vue'
 
   const partidos = [
