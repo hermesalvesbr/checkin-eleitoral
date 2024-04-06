@@ -2,10 +2,6 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-btn color="primary" @click="abrirDialogoAdicionarPessoa"
-          >Adicionar Pessoa</v-btn
-        >
-
         <v-dialog
           v-model="dialog"
           transition="dialog-top-transition"
@@ -24,6 +20,7 @@
                 v-model="novaPessoa.votos"
                 label="Quantidade de Votos"
                 type="number"
+                value="100"
                 outlined
                 dense
               ></v-text-field>
@@ -46,8 +43,30 @@
       :headers="headers"
       :items="pessoas"
       item-key="nome"
-      class="elevation-1"
+      density="compact"
     >
+      <template v-slot:header.add="{ column }">
+        <v-btn
+          size="small"
+          class="pr-1 mb-2"
+          color="primary"
+          rounded="xs"
+          @click="abrirDialogoAdicionarPessoa"
+        >
+          <template #prepend>
+            <v-icon>mdi-plus-box</v-icon>
+          </template>
+          <span class="d-none d-sm-flex mr-1">Pessoa</span>
+        </v-btn>
+      </template>
+      <template v-slot:item.add="{ item }">
+        <v-btn
+          class="ma-1"
+          color="warning"
+          icon="mdi-delete-forever-outline"
+          size="small"
+        ></v-btn>
+      </template>
       <template v-slot:item.votos="{ item }">
         <v-text-field
           v-model.number="item.votos"
@@ -56,13 +75,10 @@
           solo
           hide-details
           @change="ordenarPessoasPorVotos"
+          density="compact"
         ></v-text-field>
       </template>
     </v-data-table-virtual>
-    <v-divider class="my-4"></v-divider>
-    <h4> {{ totalDeVotos }}</h4>
-    {{ totalDePessoas }}
-    {{ pessoas }}
   </v-container>
 </template>
 
@@ -79,8 +95,9 @@
     { nome: 'João', votos: 234 },
   ])
   const headers = ref([
-    { text: 'Nome', align: 'start', value: 'nome' },
-    { text: 'Votos', value: 'votos' },
+    { title: 'Nome', align: 'start', value: 'nome' },
+    { title: 'Votos', align: 'start', value: 'votos', width: '120px' },
+    { title: 'Add', align: 'start', value: 'add', width: '50px' },
   ])
   const dialog = ref(false)
   const novaPessoa = ref<Pessoa>({ nome: '', votos: 0 })

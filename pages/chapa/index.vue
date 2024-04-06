@@ -45,10 +45,7 @@
           </v-expansion-panel-title>
           <v-expansion-panel-text>
             <v-row justify="space-around" no-gutters>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <ChapaVereadores />
             </v-row>
           </v-expansion-panel-text>
         </v-expansion-panel>
