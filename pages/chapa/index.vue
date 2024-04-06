@@ -102,7 +102,7 @@
     { nome: 'PSDB - 45', valor: 'PSDB', logo: '/partido/PSDB.png' },
     { nome: 'PP - 11', valor: 'PP', logo: '/partido/PP.png' },
     { nome: 'PDT - 12', valor: 'PDT', logo: '/partido/PDT.png' },
-    { nome: 'UNIÃO - 44', valor: 'UNIÃO', logo: '/partido/UNIÃO.png' },
+    { nome: 'UNIÃO - 44', valor: 'UNIÃO', logo: '/partido/UNIAO.png' },
     { nome: 'PL - 22', valor: 'PL', logo: '/partido/PL.png' },
     { nome: 'PODE - 20', valor: 'PODE', logo: '/partido/PODE.png' },
     { nome: 'PSB - 40', valor: 'PSB', logo: '/partido/PSB.png' },
