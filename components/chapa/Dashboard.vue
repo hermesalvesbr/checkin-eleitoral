@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, defineProps } from 'vue'
   interface Pessoa {
     nome: string
     votos: number

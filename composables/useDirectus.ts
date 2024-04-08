@@ -37,7 +37,6 @@ class useDirectus {
       const response = await this.directus.request(
         readItems(collection as never, query_object)
       )
-
       return response
     } catch (error: any) {
       console.error('Erro ao obter itens:', error.errors)

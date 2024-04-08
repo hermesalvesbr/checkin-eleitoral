@@ -112,13 +112,6 @@
     nome: string
     valor: string
     logo: string
-    id: number // Adicionado um ID único
-    pessoas: Pessoa[] // Cada chapa tem seu próprio array de pessoas
-  }
-  interface Chapa {
-    nome: string
-    valor: string
-    logo: string
     id: number
     pessoas: Pessoa[]
   }

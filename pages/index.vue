@@ -7,6 +7,6 @@
   </div>
 </template>
 <script setup lang="ts">
-const directus = new useDirectus()
-const pessoas = await directus.getItems('pessoas')
+  const directus = new useDirectus()
+  const cidades = await directus.getItems('votantes')
 </script>
