@@ -98,10 +98,6 @@ class UtilsEduprime {
     // Se passou por todas as verificações, a senha é válida
     return true
   }
-
- 
- 
-
   maskEmail(email: string): string {
     let partes = email?.split('@')
     if (partes?.length !== 2) {
@@ -140,11 +136,9 @@ class UtilsEduprime {
     const uniqueItems = new Set(data.map((item) => JSON.stringify(item)))
     return Array.from(uniqueItems).map((item) => JSON.parse(item))
   }
- 
   async utilSleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
-
   removeNullProperties(obj: any) {
     const newObj: any = Array.isArray(obj) ? [] : {}
     for (const [key, value] of Object.entries(obj)) {
@@ -173,7 +167,6 @@ class UtilsEduprime {
       )
       .join(' ')
   }
- 
 
   daysAgo(date: Date) {
     return DateTime.fromISO(`${date}`).setLocale('pt').toRelative()
@@ -220,17 +213,12 @@ class UtilsEduprime {
 
     return sigla.substring(0, 3)
   }
- 
-  debounce(
-    func: { (): Promise<void>; apply?: any },
-    delay: number | undefined
-  ) {
-    let debounceTimeout: NodeJS.Timeout | undefined
-    return (...args: any) => {
+
+  debounce<F extends (...args: any[]) => void>(func: F, delay: number) {
+    let debounceTimeout: ReturnType<typeof setTimeout>
+    return function (...args: Parameters<F>) {
       if (debounceTimeout) clearTimeout(debounceTimeout)
-      debounceTimeout = setTimeout(() => {
-        func.apply(undefined, args)
-      }, delay)
+      debounceTimeout = setTimeout(() => func(...args), delay)
     }
   }
 }

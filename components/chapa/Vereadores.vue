@@ -75,12 +75,14 @@
           <span class="d-none d-sm-flex mr-1">Pessoa</span>
         </v-btn>
       </template>
-      <template v-slot:item.add="{ item }">
+      <template v-slot:item.add="{ index }">
         <v-btn
+          id="removerPessoa"
           class="ma-1"
           color="warning"
           icon="mdi-delete-forever-outline"
           size="small"
+          @click="abrirDialogDeRemocaoPessoa(index)"
         ></v-btn>
       </template>
       <template v-slot:item.votos="{ item }">
@@ -95,6 +97,41 @@
         ></v-text-field>
       </template>
     </v-data-table-virtual>
+    <v-dialog
+      v-model="dialogPessoa"
+      transition="dialog-bottom-transition"
+      max-width="400"
+    >
+      <v-card>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Remover Pessoa?</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="dialogPessoa = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          Você tem certeza que deseja remover esta Pessoa?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="text-none ms-4 text-white"
+            color="primary"
+            variant="flat"
+            @click="confirmarRemocaoPessoa()"
+            >Confirmar</v-btn
+          >
+          <v-btn
+            class="text-none ms-4 text-white"
+            color="secondary"
+            variant="flat"
+            @click="dialogPessoa = false"
+            >Desistir</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -110,6 +147,8 @@
   }>()
   const emit = defineEmits(['update:modelValue'])
   const pessoas = ref<Pessoa[]>(props.modelValue)
+  const dialogPessoa = ref(false)
+  const pessoaParaRemover = ref<number | null>(null)
   watch(
     pessoas,
     (newValue) => {
@@ -132,7 +171,6 @@
   const dialog = ref(false)
   const novaPessoa = ref<Pessoa>({ nome: '', votos: 0 })
 
-  // Debounce function
   function debounce(func: Function, wait: number) {
     let timeout: ReturnType<typeof setTimeout>
     return function executedFunction(...args: any) {
@@ -171,6 +209,19 @@
 
   function ordenarPessoasPorVotos() {
     pessoas.value.sort((a, b) => b.votos - a.votos)
+  }
+
+  const abrirDialogDeRemocaoPessoa = (index: number) => {
+    pessoaParaRemover.value = index
+    dialogPessoa.value = true
+  }
+
+  const confirmarRemocaoPessoa = () => {
+    if (pessoaParaRemover.value !== null) {
+      pessoas.value.splice(pessoaParaRemover.value, 1)
+      dialogPessoa.value = false
+      pessoaParaRemover.value = null
+    }
   }
 </script>
 <style lang="scss">
