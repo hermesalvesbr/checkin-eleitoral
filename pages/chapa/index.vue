@@ -53,21 +53,31 @@
         <v-expansion-panel v-for="(chapa, index) in chapasCriadas" :key="index">
           <v-expansion-panel-title>
             <v-row align-self="center">
+              <v-col cols="1">
+                <v-btn
+                  icon
+                  variant="text"
+                  @click.stop="abrirDialogDeRemocao(chapa.id)"
+                  density="compact"
+                >
+                  <v-icon>mdi-close-circle</v-icon>
+                </v-btn>
+              </v-col>
               <v-col cols="8" class="d-flex align-center">
                 <NuxtImg
                   :src="chapa.logo"
                   :alt="chapa.nome"
-                  height="35"
+                  width="35"
                   densities="x1 x2"
                 />
                 <h3 class="ml-2 mb-0">{{ totalVotosChapa(chapa.pessoas) }}</h3>
-                <span class="ml-1">votos do {{ chapa.valor }}</span>
+                <span class="ml-1 text-truncate">votos {{ chapa.valor }}</span>
               </v-col>
-              <v-col cols="4" class="d-flex justify-end">
+              <v-col cols="3" class="d-flex justify-end">
                 <v-chip
                   prepend-icon="mdi-account-tie"
                   color="primary"
-                  class="mr-6"
+                  class="pa-3 mr-3"
                   >{{ somaTotalDePessoas(chapa.pessoas) }}</v-chip
                 >
               </v-col>
@@ -79,6 +89,41 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>
+    <v-dialog
+      v-model="dialog"
+      transition="dialog-bottom-transition"
+      max-width="400"
+    >
+      <v-card>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Remover chapa?</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          Você tem certeza que deseja remover esta chapa?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="text-none ms-4 text-white"
+            color="primary"
+            variant="flat"
+            @click="confirmarRemocao()"
+            >Confirmar</v-btn
+          >
+          <v-btn
+            class="text-none ms-4 text-white"
+            color="secondary"
+            variant="flat"
+            @click="dialog = false"
+            >Desistir</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -141,6 +186,7 @@
 
   const partidoSelecionado = ref(null)
   const chapasCriadas = ref<Chapa[]>([])
+  const chapaParaRemover = ref<number | null>(null)
   let nextId = 0
   const criarChapa = () => {
     if (!partidoSelecionado.value) {
@@ -228,9 +274,29 @@
   ])
   const formatCardTextClass = (value: number | string) => {
     const length = value.toString().length
-    if (length <= 3) return 'text-h3' // Menos ou igual a 4 dígitos, tamanho grande
-    if (length <= 6) return 'text-h5' // Menos ou igual a 6 dígitos, tamanho médio
-    return 'display-1' // Mais de 6 dígitos, tamanho menor
+    if (length <= 3) return 'text-h3'
+    if (length <= 6) return 'text-h5'
+    return 'text-h6' // Mais de 6 dígitos, tamanho menor
+  }
+  const dialog = ref(false)
+  const abrirDialogDeRemocao = (id: number) => {
+    chapaParaRemover.value = id
+    dialog.value = true
+  }
+
+  const confirmarRemocao = () => {
+    if (chapaParaRemover.value !== null) {
+      removerChapa(chapaParaRemover.value)
+      dialog.value = false
+      chapaParaRemover.value = null
+    }
+  }
+
+  const removerChapa = (id: number) => {
+    const index = chapasCriadas.value.findIndex((chapa) => chapa.id === id)
+    if (index !== -1) {
+      chapasCriadas.value.splice(index, 1)
+    }
   }
 </script>
 <style scoped>
