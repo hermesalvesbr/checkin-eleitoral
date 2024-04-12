@@ -23,10 +23,15 @@
         </v-col>
       </v-col>
     </v-row>
-    <v-row v-if="cidadeSelecionada">
-      {{ cidadeSelecionada }}
-      <ChapaCriarPartidos v-model="chapasCriadas" />
-    </v-row>
+    <div id="cidade-escolhida" v-if="cidadeSelecionada">
+      <v-row>
+        <ChapaCidade v-model="cidadeSelecionada" :chapa="chapasCriadas" />
+      </v-row>
+      <v-row>
+        <ChapaCriarPartidos v-model="chapasCriadas" />
+      </v-row>
+      {{ chapasCriadas }}
+    </div>
   </v-container>
 </template>
 
@@ -48,13 +53,14 @@
     uf: string
     totalEleitores: number
     totalComparecimento: number
+    chapa: string
   }
   const d = new useDirectus()
   const busca = ref('')
   const cidades = ref<Cidade[]>([])
   const cidadeSelecionada = ref<Cidade | null>(null)
   const chapasCriadas = ref<Chapa[]>([])
-
+  const totalChapa = computed(() => 290)
   function debounce(fn: (...args: any[]) => void, delay: number) {
     let timeoutId: any
     return (...args: any[]) => {
