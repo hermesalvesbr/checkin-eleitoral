@@ -6,7 +6,7 @@
           {{ cidade.nome }}
           <template v-slot:actions="{ expanded }">
             <span v-if="!expanded" class="text-caption mr-7">
-              Chapas {{ totalChapa.toLocaleString() }}
+              Votos disponíveis {{ votosDisponiveis.toLocaleString() }}
             </span>
             <v-icon
               :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -16,28 +16,28 @@
         <v-expansion-panel-text>
           <v-list dense>
             <v-list-item>
-              <v-list-item-content class="d-flex justify-space-between">
+              <div class="d-flex justify-space-between align-center w-100">
                 <v-list-item-title>Eleitores</v-list-item-title>
                 <v-list-item-subtitle>{{
                   totalEleitores
                 }}</v-list-item-subtitle>
-              </v-list-item-content>
+              </div>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content class="d-flex justify-space-between">
+              <div class="d-flex justify-space-between align-center w-100">
                 <v-list-item-title>Comparecimento</v-list-item-title>
                 <v-list-item-subtitle>{{
                   totalComparecimento
                 }}</v-list-item-subtitle>
-              </v-list-item-content>
+              </div>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content class="d-flex justify-space-between">
-                <v-list-item-title>Chapa</v-list-item-title>
+              <div class="d-flex justify-space-between align-center w-100">
+                <v-list-item-title>Votos disponíveis</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  totalChapa.toLocaleString()
+                  votosDisponiveis.toLocaleString()
                 }}</v-list-item-subtitle>
-              </v-list-item-content>
+              </div>
             </v-list-item>
           </v-list>
         </v-expansion-panel-text>
@@ -45,7 +45,6 @@
     </v-expansion-panels>
   </v-col>
 </template>
-
 <script setup lang="ts">
   interface Pessoa {
     nome: string
@@ -59,6 +58,7 @@
     chapa: string
   }
   interface Chapa {
+    cidadeId: number
     nome: string
     valor: string
     logo: string
@@ -80,6 +80,10 @@
   const totalComparecimento = computed(() =>
     cidade.value.totalComparecimento.toLocaleString()
   )
+  const votosDisponiveis = computed(
+    () => cidade.value.totalComparecimento - totalChapa.value
+  )
+
   function calculateTotalChapa(): number {
     return chapa.value.reduce((acc, curr) => {
       const totalVotosChapa = curr.pessoas.reduce((accPessoa, currPessoa) => {

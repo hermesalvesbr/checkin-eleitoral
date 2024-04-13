@@ -103,22 +103,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
-  interface Pessoa {
-    nome: string
-    votos: number
-  }
-  interface Chapa {
-    nome: string
-    valor: string
-    logo: string
-    id: number
-    pessoas: Pessoa[]
-  }
+  import type { Chapa, Cidade, Pessoa } from '~/types'
 
-  const { modelValue } = defineProps<{
+  const props = defineProps<{
     modelValue: Chapa[]
+    cidade: Cidade
   }>()
+  const { modelValue, cidade } = toRefs(props)
 
   const emit = defineEmits(['update:modelValue'])
 
@@ -184,6 +175,7 @@
         )
       ) {
         const novaChapa = {
+          cidadeId: cidade.value.id,
           ...partidoDetalhes,
           id: nextId.value++,
           pessoas: [],
@@ -224,3 +216,4 @@
     }
   }
 </script>
+import type { Chapa, Cidade, Pessoa } from '~/types';
