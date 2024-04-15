@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row align-self="center" no-gutters>
-      <v-col cols="7">
+    <v-row no-gutters class="align-center">
+      <v-col cols="12" class="d-flex">
         <v-autocomplete
           density="comfortable"
           :items="partidos"
@@ -9,16 +9,20 @@
           item-value="valor"
           label="Escolha um partido"
           v-model="partidoSelecionado"
-          class="pt-2"
+          class="flex-grow-1"
           autocomplete="off"
         ></v-autocomplete>
-      </v-col>
-      <v-col cols="5" class="d-flex justify-end">
-        <v-btn color="primary" @click="criarChapa" class="my-auto"
-          >Criar Chapa</v-btn
+        <v-btn
+          color="primary"
+          @click="criarChapa"
+          class="ml-2 mt-2"
+          :style="{ height: '37px' }"
         >
+          Criar Chapa
+        </v-btn>
       </v-col>
     </v-row>
+
     <ChapaDashboard v-model="chapasCriadas" />
     <v-row id="partidos">
       <v-expansion-panels>
@@ -103,22 +107,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
-  interface Pessoa {
-    nome: string
-    votos: number
-  }
-  interface Chapa {
-    nome: string
-    valor: string
-    logo: string
-    id: number
-    pessoas: Pessoa[]
-  }
+  import type { Chapa, Cidade, Pessoa } from '~/types'
 
-  const { modelValue } = defineProps<{
+  const props = defineProps<{
     modelValue: Chapa[]
+    cidade: Cidade
   }>()
+  const { modelValue, cidade } = toRefs(props)
 
   const emit = defineEmits(['update:modelValue'])
 
@@ -184,6 +179,7 @@
         )
       ) {
         const novaChapa = {
+          cidadeId: cidade.value.id,
           ...partidoDetalhes,
           id: nextId.value++,
           pessoas: [],

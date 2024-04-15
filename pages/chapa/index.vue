@@ -28,39 +28,29 @@
         <ChapaCidade v-model="cidadeSelecionada" :chapa="chapasCriadas" />
       </v-row>
       <v-row>
-        <ChapaCriarPartidos v-model="chapasCriadas" />
+        <ChapaCriarPartidos
+          v-model="chapasCriadas"
+          :cidade="cidadeSelecionada"
+        />
       </v-row>
-      {{ chapasCriadas }}
+      <v-row id="coeficiente" class="mt-7">
+        <ChapaCoeficiente
+          :cidade-selecionada="cidadeSelecionada"
+          v-model="chapasCriadas"
+        />
+      </v-row>
     </div>
   </v-container>
 </template>
 
 <script setup lang="ts">
-  interface Pessoa {
-    nome: string
-    votos: number
-  }
-  interface Chapa {
-    nome: string
-    valor: string
-    logo: string
-    id: number
-    pessoas: Pessoa[]
-  }
-  interface Cidade {
-    id: number
-    nome: string
-    uf: string
-    totalEleitores: number
-    totalComparecimento: number
-    chapa: string
-  }
+  import type { Chapa, Cidade } from '~/types'
+
   const d = new useDirectus()
   const busca = ref('')
   const cidades = ref<Cidade[]>([])
   const cidadeSelecionada = ref<Cidade | null>(null)
   const chapasCriadas = ref<Chapa[]>([])
-  const totalChapa = computed(() => 290)
   function debounce(fn: (...args: any[]) => void, delay: number) {
     let timeoutId: any
     return (...args: any[]) => {
@@ -80,7 +70,14 @@
 
     const response = await d.getItems('votantes', {
       search: busca.value,
-      fields: ['id', 'cidade', 'uf', 'total_eleitores', 'total_comparecimento'],
+      fields: [
+        'id',
+        'cidade',
+        'uf',
+        'total_eleitores',
+        'total_comparecimento',
+        'vereadores',
+      ],
       limit: 10,
     })
 
@@ -90,6 +87,7 @@
       uf: item.uf,
       totalEleitores: item.total_eleitores,
       totalComparecimento: item.total_comparecimento,
+      vereadores: item.vereadores,
     }))
   }
   const debouncedCarregarCidades = debounce(carregarCidades, 500)
