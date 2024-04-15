@@ -220,4 +220,3 @@
     }
   }
 </script>
-import type { Chapa, Cidade, Pessoa } from '~/types';

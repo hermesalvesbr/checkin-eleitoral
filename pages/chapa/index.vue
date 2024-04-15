@@ -70,7 +70,14 @@
 
     const response = await d.getItems('votantes', {
       search: busca.value,
-      fields: ['id', 'cidade', 'uf', 'total_eleitores', 'total_comparecimento'],
+      fields: [
+        'id',
+        'cidade',
+        'uf',
+        'total_eleitores',
+        'total_comparecimento',
+        'vereadores',
+      ],
       limit: 10,
     })
 
@@ -80,8 +87,8 @@
       uf: item.uf,
       totalEleitores: item.total_eleitores,
       totalComparecimento: item.total_comparecimento,
+      vereadores: item.vereadores,
     }))
   }
   const debouncedCarregarCidades = debounce(carregarCidades, 500)
 </script>
-import type { Cidade, Chapa } from '~/types';

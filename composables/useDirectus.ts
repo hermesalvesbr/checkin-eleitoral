@@ -10,6 +10,7 @@ import {
   passwordRequest,
   passwordReset,
   readUsers,
+  updateItem,
 } from '@directus/sdk'
 import useUtils from './useUtils'
 
@@ -212,6 +213,22 @@ class useDirectus {
       return usuario
     } catch (error) {
       console.error(error)
+      return null
+    }
+  }
+  async updateItem(
+    collection: string,
+    key: string,
+    data: object
+  ): Promise<any> {
+    try {
+      const response = await this.directus.request(
+        updateItem(collection as never, key, data as never)
+      )
+      console.log('update item', response)
+      return response
+    } catch (error) {
+      console.error('Erro ao criar itens:', error)
       return null
     }
   }

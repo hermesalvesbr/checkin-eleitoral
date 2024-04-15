@@ -17,4 +17,5 @@ export type Cidade = {
   totalEleitores: number
   totalComparecimento: number
   chapa: string
+  vereadores: number | null
 }
