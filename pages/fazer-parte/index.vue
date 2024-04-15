@@ -1,14 +1,13 @@
 <template>
-  <v-card class="mx-auto" max-width="344" title="Cadastro de Usuário">
+  <v-card class="mx-auto" max-width="344" title="Fazer parte">
     <v-container>
       <v-row>
         <v-col cols="12">
-          <!-- Botão para login com Google usando Vuetify SSO componente -->
-          <v-btn color="red" @click="signInWithGoogle" block large>
-            <v-icon left>mdi-google</v-icon>
+          <v-btn color="white" class="google-sign-in-btn" outlined>
+            <v-img src="/google.png" class="google-logo" alt="Google login" />
             Entrar com Google
           </v-btn>
-
+          <v-divider class="px-3 pa-5"></v-divider>
           <!-- Link para mostrar formulário de cadastro caso necessário -->
           <v-btn color="primary" @click="showForm = !showForm" block>
             {{ showForm ? 'Ocultar Formulário' : 'Ou cadastre-se manualmente' }}
@@ -23,21 +22,12 @@
                 label="Nome"
                 variant="underlined"
               ></v-text-field>
-
-              <v-text-field
-                v-model="sobrenome"
-                color="primary"
-                label="Sobrenome"
-                variant="underlined"
-              ></v-text-field>
-
               <v-text-field
                 v-model="email"
                 color="primary"
                 label="E-mail"
                 variant="underlined"
               ></v-text-field>
-
               <v-text-field
                 v-model="senha"
                 color="primary"
@@ -46,14 +36,12 @@
                 variant="underlined"
                 type="password"
               ></v-text-field>
-
               <v-text-field
                 v-model="bairro"
                 color="primary"
                 label="Bairro na cidade"
                 variant="underlined"
               ></v-text-field>
-
               <v-menu
                 ref="menu"
                 v-model="menu"
@@ -98,7 +86,6 @@
 
 <script setup lang="ts">
   const nome = ref('')
-  const sobrenome = ref('')
   const email = ref('')
   const senha = ref('')
   const bairro = ref('')
@@ -114,7 +101,6 @@
   const completeRegistration = () => {
     console.log('Dados do usuário:', {
       nome: nome.value,
-      sobrenome: sobrenome.value,
       email: email.value,
       senha: senha.value,
       bairro: bairro.value,
@@ -123,3 +109,16 @@
     })
   }
 </script>
+<style scoped>
+  .google-sign-in-btn {
+    color: #4285f4; /* Cor do texto do Google */
+    border-color: #4285f4; /* Cor da borda do Google */
+  }
+
+  .google-logo {
+    background-color: #ffffff; /* Fundo branco para o ícone */
+    padding: 8px; /* Espaçamento ao redor do ícone */
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    border-radius: 50%; /* Para tornar o ícone circular */
+  }
+</style>
