@@ -62,8 +62,8 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <v-divider :thickness="2"></v-divider>
-    <v-row id="coeficiente" class="justify-start" v-if="coeficienteEleitoral">
+    <v-row id="coeficiente" class="justify-start" v-if="numeroVereadores != 0">
+      <v-divider :thickness="2"></v-divider>
       <v-col cols="12">
         <v-list>
           <v-list-subheader class="text-caption text-uppercase"
@@ -80,9 +80,12 @@
             >
           </v-list-item>
           <v-list-item color="primary">
-            <v-list-item-title class="text-caption"
-              >{{ numeroVereadores }} vagas de vereador</v-list-item-title
+            <v-list-item-title
+              class="text-caption"
+              :class="{ 'font-weight-bold text-red': numeroVereadores === 0 }"
             >
+              {{ numeroVereadores }} vagas de vereador
+            </v-list-item-title>
             <v-list-item-subtitle class="text-caption"
               >Candidatos são competitivos apartir de
               {{ minimoVotos.toFixed(0) }} votos</v-list-item-subtitle
@@ -99,7 +102,13 @@
         </v-list>
         <v-col cols="12" class="text-caption mt-2 bg-blue-lighten-5">
           Caso a quantidade de vereadores esteja incorreta,
-          <a href="#!" @click="" class="text-decoration-none">informe agora</a>.
+          <a
+            target="_blank"
+            :href="`https://wa.me/+5581989531156?text=Ol%C3%A1%2C%20Quantidade%20de%20vereadores%20em%20${cidade.nome}%20est%C3%A1%20incorreto.`"
+            @click=""
+            class="text-decoration-none"
+            >informe agora</a
+          >.
         </v-col>
       </v-col>
     </v-row>
@@ -134,7 +143,6 @@
       d.updateItem('votantes', cidade.value.id.toString(), {
         vereadores: numeroVereadores.value,
       })
-      console.log(`Número de vereadores salvos: ${numeroVereadores.value}`)
       dialog.value = false
     }
   }
@@ -157,7 +165,6 @@
       fields: ['vereadores'],
       limit: 10,
     })
-    console.log('Pegou vereadores', response.vereadores)
     return response.vereadores
   }
 
@@ -179,7 +186,6 @@
       if (numeroVereadores.value > 0) {
         calcular()
         minimoVotos.value = calcularVotosPorCandidato()
-        console.log('Minimo de votos', minimoVotos)
       }
     }
   })

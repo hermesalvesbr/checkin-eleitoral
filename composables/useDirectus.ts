@@ -225,7 +225,6 @@ class useDirectus {
       const response = await this.directus.request(
         updateItem(collection as never, key, data as never)
       )
-      console.log('update item', response)
       return response
     } catch (error) {
       console.error('Erro ao criar itens:', error)

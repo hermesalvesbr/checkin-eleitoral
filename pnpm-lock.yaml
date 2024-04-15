@@ -43,6 +43,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.12.7
     version: 20.12.7
+  '@vueuse/core':
+    specifier: ^10.9.0
+    version: 10.9.0(vue@3.4.21)
   csv-parser:
     specifier: ^3.0.0
     version: 3.0.0

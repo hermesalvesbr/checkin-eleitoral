@@ -22,8 +22,7 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <ChapaDashboard v-model="chapasCriadas" />
+    <ChapaDashboard v-model="chapasCriadasComputed" />
     <v-row id="partidos">
       <v-expansion-panels>
         <v-expansion-panel
@@ -108,7 +107,7 @@
 
 <script setup lang="ts">
   import type { Chapa, Cidade, Pessoa } from '~/types'
-
+  import { useStorage, StorageSerializers } from '@vueuse/core'
   const props = defineProps<{
     modelValue: Chapa[]
     cidade: Cidade
@@ -162,9 +161,15 @@
   ]
 
   const partidoSelecionado = ref(null)
-  const chapasCriadas = ref<Chapa[]>([])
+  const chapasCriadas = useStorage<Chapa[]>('chapas-criadas', [], undefined, {
+    serializer: StorageSerializers.object,
+  })
   const chapaParaRemover = ref<number | null>(null)
-  const chapasCriadasComputed = computed(() => chapasCriadas.value)
+  const chapasCriadasComputed = computed(() =>
+    chapasCriadas.value.filter(
+      (chapa: { cidadeId: number }) => chapa.cidadeId === cidade.value.id
+    )
+  )
   let nextId = ref(0)
 
   const criarChapa = () => {

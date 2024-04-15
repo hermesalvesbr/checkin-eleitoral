@@ -25,18 +25,24 @@
     </v-row>
     <div id="cidade-escolhida" v-if="cidadeSelecionada">
       <v-row>
-        <ChapaCidade v-model="cidadeSelecionada" :chapa="chapasCriadas" />
+        <ChapaCidade
+          v-model="cidadeSelecionada"
+          :chapa="chapasCriadas"
+          :key="cidadeSelecionada.id"
+        />
       </v-row>
       <v-row>
         <ChapaCriarPartidos
           v-model="chapasCriadas"
           :cidade="cidadeSelecionada"
+          :key="cidadeSelecionada.id"
         />
       </v-row>
       <v-row id="coeficiente" class="mt-7">
         <ChapaCoeficiente
           :cidade-selecionada="cidadeSelecionada"
           v-model="chapasCriadas"
+          :key="cidadeSelecionada.id"
         />
       </v-row>
     </div>
@@ -45,12 +51,16 @@
 
 <script setup lang="ts">
   import type { Chapa, Cidade } from '~/types'
-
+  import { useStorage, StorageSerializers } from '@vueuse/core'
   const d = new useDirectus()
   const busca = ref('')
   const cidades = ref<Cidade[]>([])
   const cidadeSelecionada = ref<Cidade | null>(null)
-  const chapasCriadas = ref<Chapa[]>([])
+  // Usando useStorage para persistir chapasCriadas
+  const chapasCriadas = useStorage<Chapa[]>('chapas-criadas', [], undefined, {
+    serializer: StorageSerializers.object,
+  })
+
   function debounce(fn: (...args: any[]) => void, delay: number) {
     let timeoutId: any
     return (...args: any[]) => {
