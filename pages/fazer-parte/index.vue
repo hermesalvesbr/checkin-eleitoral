@@ -105,6 +105,7 @@
 </template>
 
 <script setup lang="ts">
+  const d = new useDirectus()
   const nome = ref('')
   const email = ref('')
   const senha = ref('')
@@ -128,13 +129,22 @@
       termos: termos.value,
     })
   }
-</script>
-<style scoped>
-  .google-sign-in-btn {
-    color: #4285f4; /* Cor do texto do Google */
-    border-color: #4285f4; /* Cor da borda do Google */
+  const verificarParametros = () => {
+    const route = useRoute()
+    const politico = route.params.politico
+    const cidade = route.params.cidade
+
+    if (politico !== undefined && cidade !== undefined) {
+      console.log('Parâmetros encontrados:', { politico, cidade })
+    } else {
+      console.log('Parâmetros incompletos.')
+      // Você pode adicionar aqui a lógica para lidar com a ausência de um ou ambos os parâmetros
+    }
   }
 
+  verificarParametros()
+</script>
+<style scoped>
   .google-logo {
     background-color: #ffffff; /* Fundo branco para o ícone */
     padding: 8px; /* Espaçamento ao redor do ícone */
