@@ -45,73 +45,50 @@
     </v-expansion-panels>
   </v-col>
 </template>
+
 <script setup lang="ts">
-  interface Pessoa {
-    nome: string
-    votos: number
-  }
-  interface Cidade {
-    nome: string
-    uf: string
-    totalEleitores: number
-    totalComparecimento: number
-    chapa: string
-  }
-  interface Chapa {
-    cidadeId: number
-    nome: string
-    valor: string
-    logo: string
-    id: number
-    pessoas: Pessoa[]
-  }
+  import type { Chapa, Cidade } from '~/types'
+
   const props = defineProps<{
     modelValue: Cidade
-    chapa: Chapa[]
+    chapas: Chapa[]
   }>()
-  const emit = defineEmits(['update:modelValue'])
 
   const cidade = computed(() => props.modelValue)
-  const chapa = ref(props.chapa)
-  const totalChapa = ref(0)
+  const chapas = ref<Chapa[]>(props.chapas)
+
+  // Utilize a watch para atualizar a ref 'chapas' sempre que as chapas do prop mudarem
+  watch(
+    () => props.chapas,
+    (newChapas) => {
+      chapas.value = newChapas
+    },
+    { deep: true }
+  )
+
+  const chapasFiltradas = computed(() =>
+    chapas.value.filter((chapa) => chapa.cidadeId === cidade.value.id)
+  )
+
+  const totalChapa = computed(() =>
+    chapasFiltradas.value.reduce(
+      (total, chapa) =>
+        total +
+        chapa.pessoas.reduce((acc, pessoa) => acc + Number(pessoa.votos), 0),
+      0
+    )
+  )
+
+  const votosDisponiveis = computed(
+    () => cidade.value.totalComparecimento - totalChapa.value
+  )
+
   const totalEleitores = computed(() =>
     cidade.value.totalEleitores.toLocaleString()
   )
   const totalComparecimento = computed(() =>
     cidade.value.totalComparecimento.toLocaleString()
   )
-  const votosDisponiveis = computed(
-    () => cidade.value.totalComparecimento - totalChapa.value
-  )
 
-  function calculateTotalChapa(): number {
-    return chapa.value.reduce((acc, curr) => {
-      const totalVotosChapa = curr.pessoas.reduce((accPessoa, currPessoa) => {
-        if (typeof currPessoa.votos === 'string') {
-          const votos = parseInt(currPessoa.votos, 10)
-          return accPessoa + (isNaN(votos) ? 0 : votos)
-        } else {
-          return accPessoa + currPessoa.votos
-        }
-      }, 0)
-      return acc + totalVotosChapa
-    }, 0)
-  }
-  watch(
-    () => props.chapa,
-    (newValue) => {
-      chapa.value = newValue
-      totalChapa.value = calculateTotalChapa()
-    },
-    { deep: true }
-  )
-
-  watch(
-    chapa,
-    () => {
-      totalChapa.value = calculateTotalChapa()
-    },
-    { deep: true }
-  )
-  const internalPanelOpen = ref(1)
+  const internalPanelOpen = ref<number>(0)
 </script>

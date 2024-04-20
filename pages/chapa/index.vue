@@ -27,8 +27,8 @@
       <v-row>
         <ChapaCidade
           v-model="cidadeSelecionada"
-          :chapa="chapasCriadas"
-          :key="cidadeSelecionada.id"
+          :chapas="chapasCriadas"
+          :key="updateKey"
         />
       </v-row>
       <v-row>
@@ -56,10 +56,18 @@
   const busca = ref('')
   const cidades = ref<Cidade[]>([])
   const cidadeSelecionada = ref<Cidade | null>(null)
-  // Usando useStorage para persistir chapasCriadas
   const chapasCriadas = useStorage<Chapa[]>('chapas-criadas', [], undefined, {
     serializer: StorageSerializers.object,
   })
+  const updateKey = ref(0)
+
+  watch(
+    chapasCriadas,
+    () => {
+      updateKey.value++
+    },
+    { deep: true }
+  )
 
   function debounce(fn: (...args: any[]) => void, delay: number) {
     let timeoutId: any

@@ -116,7 +116,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
   import type { Chapa, Cidade } from '~/types'
 
   const props = defineProps<{
@@ -133,6 +132,10 @@
   const limiteChapa = computed(() => {
     return numeroVereadores.value + 1
   })
+  const chapasDaCidade = computed(() =>
+    props.modelValue.filter((chapa) => chapa.cidadeId === cidade.value.id)
+  )
+
   function solicitarNumeroVereadores() {
     dialog.value = true
   }
@@ -169,13 +172,16 @@
   }
 
   const calcularVotosPorCandidato = (): number => {
-    const chapas = props.modelValue.length
+    const chapas = chapasDaCidade.value.length
     const candidatos = chapas * limiteChapa.value
-    return cidade.value.totalComparecimento / candidatos
+
+    const minVot = cidade.value.totalComparecimento / candidatos
+    const ajuste = minVot * 2
+    return minVot
   }
 
   watch(
-    () => props.modelValue.length,
+    () => chapasDaCidade.value.length,
     () => {
       minimoVotos.value = calcularVotosPorCandidato()
     }
