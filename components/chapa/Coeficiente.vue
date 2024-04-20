@@ -62,7 +62,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <v-row id="coeficiente" class="justify-start" v-if="numeroVereadores != 0">
+    <v-row id="coeficiente" class="justify-start" v-if="isDataValid">
       <v-divider :thickness="2"></v-divider>
       <v-col cols="12">
         <v-list>
@@ -133,6 +133,13 @@
   const limiteChapa = computed(() => {
     return numeroVereadores.value + 1
   })
+  const isDataValid = computed(() => {
+    return (
+      numeroVereadores.value > 0 &&
+      isFinite(minimoVotos.value) &&
+      minimoVotos.value > 0
+    )
+  })
   function solicitarNumeroVereadores() {
     dialog.value = true
   }
@@ -158,6 +165,7 @@
     if (numeroVereadores.value > 0) {
       coeficienteEleitoral.value =
         cidade.value.totalComparecimento / numeroVereadores.value
+      minimoVotos.value = calcularVotosPorCandidato()
     }
   }
   async function getVereadores(cidadeId: number): Promise<number> {
@@ -180,6 +188,23 @@
       minimoVotos.value = calcularVotosPorCandidato()
     }
   )
+  watch(
+    () => props.cidadeSelecionada,
+    async (newCity, oldCity) => {
+      if (newCity && newCity.id !== oldCity?.id) {
+        cidade.value = newCity
+        numeroVereadores.value = await getVereadores(newCity.id)
+        if (numeroVereadores.value > 0) {
+          calcular()
+        } else {
+          coeficienteEleitoral.value = 0
+          minimoVotos.value = 0
+        }
+      }
+    },
+    { deep: true, immediate: true }
+  )
+
   onMounted(async () => {
     if (cidade.value) {
       numeroVereadores.value = await getVereadores(cidade.value.id)

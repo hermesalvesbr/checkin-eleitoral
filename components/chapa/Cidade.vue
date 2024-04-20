@@ -80,8 +80,18 @@
   const totalComparecimento = computed(() =>
     cidade.value.totalComparecimento.toLocaleString()
   )
+  watchEffect(() => {
+    totalChapa.value = props.chapa.reduce((total, curr) => {
+      return (
+        total +
+        curr.pessoas.reduce((totalVotos, pessoa) => {
+          return totalVotos + Number(pessoa.votos)
+        }, 0)
+      )
+    }, 0)
+  })
   const votosDisponiveis = computed(
-    () => cidade.value.totalComparecimento - totalChapa.value
+    () => props.modelValue.totalComparecimento - totalChapa.value
   )
 
   function calculateTotalChapa(): number {

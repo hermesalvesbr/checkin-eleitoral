@@ -28,7 +28,7 @@
         <ChapaCidade
           v-model="cidadeSelecionada"
           :chapa="chapasCriadas"
-          :key="cidadeSelecionada.id"
+          :key="updateKey"
         />
       </v-row>
       <v-row>
@@ -42,7 +42,7 @@
         <ChapaCoeficiente
           :cidade-selecionada="cidadeSelecionada"
           v-model="chapasCriadas"
-          :key="cidadeSelecionada.id"
+          :key="updateKey"
         />
       </v-row>
     </div>
@@ -60,6 +60,15 @@
   const chapasCriadas = useStorage<Chapa[]>('chapas-criadas', [], undefined, {
     serializer: StorageSerializers.object,
   })
+  const updateKey = ref(0)
+
+  watch(
+    chapasCriadas,
+    () => {
+      updateKey.value++
+    },
+    { deep: true }
+  )
 
   function debounce(fn: (...args: any[]) => void, delay: number) {
     let timeoutId: any

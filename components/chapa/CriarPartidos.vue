@@ -171,7 +171,6 @@
     )
   )
   let nextId = ref(0)
-
   const criarChapa = () => {
     if (partidoSelecionado.value) {
       const partidoDetalhes = partidos.find(
@@ -179,7 +178,7 @@
       )
       if (
         partidoDetalhes &&
-        !chapasCriadas.value.find(
+        !chapasCriadas.value.some(
           (chapa) => chapa.valor === partidoDetalhes.valor
         )
       ) {
@@ -192,6 +191,9 @@
         chapasCriadas.value.push(novaChapa)
         emit('update:modelValue', chapasCriadas.value)
         partidoSelecionado.value = null
+        nextTick(() => {
+          // Garante que a atualização da interface do usuário aconteça após a adição
+        })
       } else {
         alert(
           'Uma chapa para este partido já foi criada ou partido não encontrado.'
