@@ -22,7 +22,10 @@
         </v-btn>
       </v-col>
     </v-row>
-    <ChapaDashboard v-model="chapasCriadasComputed" />
+    <ChapaDashboard
+      v-model="chapasCriadasComputed"
+      :key="chapasCriadasComputed.length"
+    />
     <v-row id="partidos">
       <v-expansion-panels>
         <v-expansion-panel
@@ -170,35 +173,31 @@
       (chapa: { cidadeId: number }) => chapa.cidadeId === cidade.value.id
     )
   )
+
   let nextId = ref(0)
   const criarChapa = () => {
-    if (partidoSelecionado.value) {
-      const partidoDetalhes = partidos.find(
-        (partido) => partido.valor === partidoSelecionado.value
+    const partidoDetalhes = partidos.find(
+      (partido) => partido.valor === partidoSelecionado.value
+    )
+    if (
+      partidoDetalhes &&
+      !chapasCriadasComputed.value.some(
+        (chapa) => chapa.valor === partidoDetalhes.valor
       )
-      if (
-        partidoDetalhes &&
-        !chapasCriadas.value.some(
-          (chapa) => chapa.valor === partidoDetalhes.valor
-        )
-      ) {
-        const novaChapa = {
-          cidadeId: cidade.value.id,
-          ...partidoDetalhes,
-          id: nextId.value++,
-          pessoas: [],
-        }
-        chapasCriadas.value.push(novaChapa)
-        emit('update:modelValue', chapasCriadas.value)
-        partidoSelecionado.value = null
-        nextTick(() => {
-          // Garante que a atualização da interface do usuário aconteça após a adição
-        })
-      } else {
-        alert(
-          'Uma chapa para este partido já foi criada ou partido não encontrado.'
-        )
+    ) {
+      const novaChapa = {
+        cidadeId: cidade.value.id,
+        ...partidoDetalhes,
+        id: Date.now(), // Usando timestamp para garantir um ID único
+        pessoas: [],
       }
+      chapasCriadas.value.push(novaChapa)
+      emit('update:modelValue', chapasCriadas.value)
+      partidoSelecionado.value = null
+    } else {
+      alert(
+        'Uma chapa para este partido já foi criada ou partido não encontrado.'
+      )
     }
   }
   const removerChapa = (id: number) => {
@@ -216,14 +215,29 @@
   }
   const dialog = ref(false)
   const abrirDialogDeRemocao = (id: number) => {
-    chapaParaRemover.value = id
-    dialog.value = true
+    const chapa = chapasCriadas.value.find(
+      (chapa) => chapa.id === id && chapa.cidadeId === cidade.value.id
+    )
+    if (chapa) {
+      chapaParaRemover.value = id
+      dialog.value = true
+    } else {
+      alert('Erro: Chapa não encontrada.')
+    }
   }
   const confirmarRemocao = () => {
-    if (chapaParaRemover.value !== null) {
-      removerChapa(chapaParaRemover.value)
+    const index = chapasCriadas.value.findIndex(
+      (chapa) =>
+        chapa.id === chapaParaRemover.value &&
+        chapa.cidadeId === cidade.value.id
+    )
+    if (index !== -1) {
+      chapasCriadas.value.splice(index, 1)
+      emit('update:modelValue', chapasCriadas.value)
       dialog.value = false
       chapaParaRemover.value = null
+    } else {
+      alert('Erro ao remover a chapa.')
     }
   }
 </script>

@@ -27,7 +27,7 @@
       <v-row>
         <ChapaCidade
           v-model="cidadeSelecionada"
-          :chapa="chapasCriadas"
+          :chapas="chapasCriadas"
           :key="updateKey"
         />
       </v-row>
@@ -42,7 +42,7 @@
         <ChapaCoeficiente
           :cidade-selecionada="cidadeSelecionada"
           v-model="chapasCriadas"
-          :key="updateKey"
+          :key="cidadeSelecionada.id"
         />
       </v-row>
     </div>
@@ -56,7 +56,6 @@
   const busca = ref('')
   const cidades = ref<Cidade[]>([])
   const cidadeSelecionada = ref<Cidade | null>(null)
-  // Usando useStorage para persistir chapasCriadas
   const chapasCriadas = useStorage<Chapa[]>('chapas-criadas', [], undefined, {
     serializer: StorageSerializers.object,
   })

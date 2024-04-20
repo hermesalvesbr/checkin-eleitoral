@@ -62,7 +62,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <v-row id="coeficiente" class="justify-start" v-if="isDataValid">
+    <v-row id="coeficiente" class="justify-start" v-if="numeroVereadores != 0">
       <v-divider :thickness="2"></v-divider>
       <v-col cols="12">
         <v-list>
@@ -116,7 +116,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
   import type { Chapa, Cidade } from '~/types'
 
   const props = defineProps<{
@@ -133,13 +132,10 @@
   const limiteChapa = computed(() => {
     return numeroVereadores.value + 1
   })
-  const isDataValid = computed(() => {
-    return (
-      numeroVereadores.value > 0 &&
-      isFinite(minimoVotos.value) &&
-      minimoVotos.value > 0
-    )
-  })
+  const chapasDaCidade = computed(() =>
+    props.modelValue.filter((chapa) => chapa.cidadeId === cidade.value.id)
+  )
+
   function solicitarNumeroVereadores() {
     dialog.value = true
   }
@@ -165,7 +161,6 @@
     if (numeroVereadores.value > 0) {
       coeficienteEleitoral.value =
         cidade.value.totalComparecimento / numeroVereadores.value
-      minimoVotos.value = calcularVotosPorCandidato()
     }
   }
   async function getVereadores(cidadeId: number): Promise<number> {
@@ -177,34 +172,20 @@
   }
 
   const calcularVotosPorCandidato = (): number => {
-    const chapas = props.modelValue.length
+    const chapas = chapasDaCidade.value.length
     const candidatos = chapas * limiteChapa.value
-    return cidade.value.totalComparecimento / candidatos
+
+    const minVot = cidade.value.totalComparecimento / candidatos
+    const ajuste = minVot * 2
+    return minVot
   }
 
   watch(
-    () => props.modelValue.length,
+    () => chapasDaCidade.value.length,
     () => {
       minimoVotos.value = calcularVotosPorCandidato()
     }
   )
-  watch(
-    () => props.cidadeSelecionada,
-    async (newCity, oldCity) => {
-      if (newCity && newCity.id !== oldCity?.id) {
-        cidade.value = newCity
-        numeroVereadores.value = await getVereadores(newCity.id)
-        if (numeroVereadores.value > 0) {
-          calcular()
-        } else {
-          coeficienteEleitoral.value = 0
-          minimoVotos.value = 0
-        }
-      }
-    },
-    { deep: true, immediate: true }
-  )
-
   onMounted(async () => {
     if (cidade.value) {
       numeroVereadores.value = await getVereadores(cidade.value.id)
