@@ -1,7 +1,7 @@
 import { toast } from 'vue3-toastify'
 import { DateTime } from 'luxon'
 
-class UtilsEduprime {
+class UtilsEleitoral {
   router: any
   constructor() {}
 
@@ -221,5 +221,21 @@ class UtilsEduprime {
       debounceTimeout = setTimeout(() => func(...args), delay)
     }
   }
+
+  codificarPermalink(cidadeId: string, chapaId: number): string {
+    const uniqueCode = `${cidadeId}-${chapaId}` // Concatena os IDs com um hífen
+    return btoa(uniqueCode) // Codifica a string resultante em base64
+  }
+  decodificarPermalink(codigoUnico: string): {
+    cidadeId: string
+    chapaId: number
+  } {
+    const decodedString = atob(codigoUnico) // Decodifica de base64
+    const ids = decodedString.split('-') // Supõe que o formato original era 'cidadeId-chapaId'
+    return {
+      cidadeId: ids[0],
+      chapaId: parseInt(ids[1]),
+    }
+  }
 }
-export default UtilsEduprime
+export default UtilsEleitoral
