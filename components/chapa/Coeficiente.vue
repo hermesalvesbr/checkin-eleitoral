@@ -64,7 +64,7 @@
     </v-row>
     <v-row id="coeficiente" class="justify-start" v-if="numeroVereadores != 0">
       <v-divider :thickness="2"></v-divider>
-      <v-col cols="12">
+      <v-col cols="12" v-if="minimoVotos > 10">
         <v-list>
           <v-list-subheader class="text-caption text-uppercase"
             >Coeficiente eleitoral</v-list-subheader
@@ -88,7 +88,7 @@
             </v-list-item-title>
             <v-list-item-subtitle class="text-caption"
               >Candidatos são competitivos apartir de
-              {{ minimoVotos.toFixed(0) }} votos</v-list-item-subtitle
+              {{ minimoVotos }} votos</v-list-item-subtitle
             >
           </v-list-item>
           <v-list-item color="primary">
@@ -174,10 +174,12 @@
   const calcularVotosPorCandidato = (): number => {
     const chapas = chapasDaCidade.value.length
     const candidatos = chapas * limiteChapa.value
-
+    if (candidatos === 0) {
+      return 0
+    }
     const minVot = cidade.value.totalComparecimento / candidatos
-    const ajuste = minVot * 2
-    return minVot
+
+    return +minVot.toFixed(0)
   }
 
   watch(
