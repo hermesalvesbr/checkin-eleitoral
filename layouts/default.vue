@@ -1,23 +1,77 @@
 <script setup lang="ts">
-  //site: {
-  //  url: 'https://campanha.softagon.app',
-  //name: 'Construção Chapa Eleitoral',
-  //description: 'Softagon Sistemas',
-  // defaultLocale: 'pt-br', // not needed if you have @nuxtjs/i18n installed
-  // },
+  const drawer = ref(false)
+
+  const toggleDrawer = () => {
+    drawer.value = !drawer.value
+  }
+
+  const shareOnWhatsApp = () => {
+    const url = 'https://campanha.softagon.app'
+    const message = encodeURIComponent(
+      'Confira esta campanha para construção de chapa eleitoral!'
+    )
+    const whatsappUrl = `https://wa.me/?text=${message}%20${url}`
+    window.open(whatsappUrl, '_blank')
+  }
+
+  const items = [
+    { type: 'subheader', title: 'Cidades' },
+    { title: 'Descobrir', value: 1 },
+    { type: 'divider' },
+    { type: 'subheader', title: 'Você' },
+    { title: 'Suas análises', value: 4 },
+  ]
 </script>
+
 <template>
   <v-card class="mx-auto">
     <v-layout>
+      <v-navigation-drawer v-model="drawer" app>
+        <!-- Conteúdo do menu lateral -->
+        <v-list :items="items"></v-list>
+        <v-divider></v-divider>
+        <v-card class="mx-auto" max-width="400">
+          <v-img
+            class="align-end text-white"
+            height="220"
+            src="/softagon-sistemas.png"
+            cover
+          >
+          </v-img>
+          <v-card-subtitle class="pt-4 text-wrap">
+            Softagon Sistemas
+          </v-card-subtitle>
+          <v-card-text>
+            <div
+              >Conte com a Softagon para soluções completas para sua Prefeitura
+              e Câmara de Vereadores</div
+            >
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              class="text-none mb-4"
+              color="indigo-darken-3"
+              size="x-large"
+              variant="flat"
+              block
+              href="https://wa.me/558189531156?text=Olá%20Softagon,%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços%20para%20Câmara%20de%20Vereadores%20e%20Prefeituras."
+              target="_blank"
+            >
+              Fale com Softagon
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-navigation-drawer>
+
       <v-app-bar color="secondary" density="compact" elevation="1">
         <template v-slot:prepend>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
         </template>
 
         <v-app-bar-title>Coligação para Vereador</v-app-bar-title>
 
         <template v-slot:append>
-          <v-btn icon="mdi-export-variant"></v-btn>
+          <v-btn icon="mdi-export-variant" @click="shareOnWhatsApp"></v-btn>
         </template>
       </v-app-bar>
 
