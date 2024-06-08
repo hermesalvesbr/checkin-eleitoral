@@ -1,27 +1,23 @@
 <template>
-  <v-container class="pt-5 mt-5">
+  <v-container class="pt-4 mt-5">
     <v-row justify="center">
-      <v-col cols="12">
-        <v-col cols="12">
-          <v-autocomplete
-            :items="cidades"
-            v-model="cidadeSelecionada"
-            @update:search="onSearchChange"
-            item-title="nome"
-            :return-object="true"
-            class="mx-auto"
-            menu-icon=""
-            placeholder="Cidade que criará a chapa"
-            prepend-inner-icon="mdi-magnify"
-            style="max-width: 650px"
-            theme="light"
-            variant="solo"
-            auto-select-first
-            :hide-no-data="true"
-            rounded
-          ></v-autocomplete>
-        </v-col>
-      </v-col>
+      <v-autocomplete
+        :items="cidades"
+        v-model="cidadeSelecionada"
+        @update:search="onSearchChange"
+        item-title="nome"
+        :return-object="true"
+        class="mx-auto"
+        menu-icon=""
+        placeholder="Cidade que criará a chapa"
+        prepend-inner-icon="mdi-magnify"
+        style="max-width: 650px"
+        theme="light"
+        variant="solo"
+        auto-select-first
+        :hide-no-data="true"
+        rounded
+      ></v-autocomplete>
     </v-row>
     <div id="cidade-escolhida" v-if="cidadeSelecionada">
       <v-row>

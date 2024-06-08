@@ -6,15 +6,15 @@
 
 <script setup lang="ts">
   useSeoMeta({
-    title: 'Construa Chapa Eleitoral',
-    ogTitle: 'Construa Chapa Eleitoral',
+    title: 'Construa sua Chapa Eleitoral',
+    ogTitle: 'Construa a Chapa Eleitoral',
     description:
       'Análise de coeficiente eleitoral para vereadores. Quem vence para vereador na sua cidade?',
     ogDescription:
       'Análise de coeficiente eleitoral para vereadores. Quem vence para vereador na sua cidade?',
     ogImage: 'https://campanha.softagon.app/softagon.png',
     twitterCard: 'summary_large_image',
-    twitterTitle: 'Construa Chapa Eleitoral',
+    twitterTitle: 'Construa uma Chapa Eleitoral',
     twitterDescription:
       'Análise de coeficiente eleitoral para vereadores. Quem vence para vereador na sua cidade?',
     twitterImage: 'https://campanha.softagon.app/softagon.png',

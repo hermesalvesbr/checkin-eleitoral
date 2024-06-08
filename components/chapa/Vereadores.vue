@@ -60,6 +60,7 @@
       item-key="nome"
       density="compact"
       class="titulo-negrito"
+      no-data-text="Insira o nome do candidato e a quantidade de votos"
     >
       <template v-slot:header.add="{ column }">
         <v-btn
