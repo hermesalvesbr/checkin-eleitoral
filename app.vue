@@ -26,8 +26,11 @@
   })
 
   useHead({
+    htmlAttrs: {
+      lang: 'pt-BR',
+    },
     link: [
-      { rel: 'canonical', href: 'https://seu-site.com' }, // Adiciona URL canônica
+      { rel: 'canonical', href: 'https://campanha.softagon.app' }, // Adiciona URL canônica
       {
         rel: 'apple-touch-icon',
         sizes: '57x57',

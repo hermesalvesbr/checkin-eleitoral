@@ -25,6 +25,8 @@
         <v-container fluid>
           <v-row dense>
             <v-col>
+              <h1>Construa a Chapa Eleitoral da sua Cidade </h1>
+              <h2>informe os vereadores por partido</h2>
               <slot />
             </v-col>
           </v-row>
