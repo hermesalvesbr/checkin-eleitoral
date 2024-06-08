@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-4 pa-2" variant="elevated">
+  <v-card class="pt-5">
     <v-card-item>
       <v-card-title class="pa-2 pl-4 bg-primary">
         <v-icon left size="small">mdi-vote</v-icon>
