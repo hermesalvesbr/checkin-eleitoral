@@ -16,10 +16,10 @@
 
   const items = [
     { type: 'subheader', title: 'Cidades' },
-    { title: 'Descobrir', value: 1 },
+    { title: 'Descobrir', value: 1, path: '/descobrir' },
     { type: 'divider' },
     { type: 'subheader', title: 'Você' },
-    { title: 'Suas análises', value: 4 },
+    { title: 'Suas análises', value: 4, path: '/suas-analises' },
   ]
 </script>
 
@@ -28,9 +28,9 @@
     <v-layout>
       <v-navigation-drawer v-model="drawer" app>
         <!-- Conteúdo do menu lateral -->
-        <v-list :items="items"></v-list>
+        <v-list :items="items" color="bg-accent"></v-list>
         <v-divider></v-divider>
-        <v-card class="mx-auto" max-width="400">
+        <v-card class="mx-auto mt-7 pt-8" max-width="400">
           <v-img
             class="align-end text-white"
             height="220"
@@ -63,12 +63,14 @@
         </v-card>
       </v-navigation-drawer>
 
-      <v-app-bar color="secondary" density="compact" elevation="1">
+      <v-app-bar color="accent" elevation="1">
         <template v-slot:prepend>
           <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
         </template>
 
-        <v-app-bar-title>Coligação para Vereador</v-app-bar-title>
+        <v-app-bar-title class="text-uppercase"
+          >Coligação Municipal</v-app-bar-title
+        >
 
         <template v-slot:append>
           <v-btn icon="mdi-export-variant" @click="shareOnWhatsApp"></v-btn>
@@ -79,8 +81,8 @@
         <v-container fluid>
           <v-row dense>
             <v-col>
-              <h1>Construa a Chapa Eleitoral da sua Cidade </h1>
-              <h2>informe os vereadores por partido</h2>
+              <h1 class="text-h5">Chapa eleitoral da sua Cidade</h1>
+              <h2 class="text-h6">informe os vereadores por partido</h2>
               <slot />
             </v-col>
           </v-row>
