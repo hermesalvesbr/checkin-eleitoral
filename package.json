@@ -22,7 +22,6 @@
     "@directus/types": "^11.1.2",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/eslint-config": "^12.0.0",
-    "@nuxtseo/module": "2.0.0-beta.55",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.2",
     "@vueuse/core": "^10.10.0",

@@ -67,7 +67,8 @@
       <v-col cols="12">
         <v-list>
           <v-list-subheader class="text-caption text-uppercase"
-            >Coeficiente eleitoral</v-list-subheader
+            >Coeficiente eleitoral
+            <span class="text-lowercase">(estimativa)</span></v-list-subheader
           >
           <v-list-item color="primary">
             <v-list-item-title class="text-caption"
@@ -174,9 +175,7 @@
   const calcularVotosPorCandidato = (): number => {
     const chapas = chapasDaCidade.value.length
     const candidatos = chapas * limiteChapa.value
-
-    const minVot = cidade.value.totalComparecimento / candidatos
-    const ajuste = minVot * 2
+    const minVot = cidade.value.totalComparecimento / (candidatos / 2)
     return minVot
   }
 

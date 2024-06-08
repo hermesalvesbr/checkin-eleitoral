@@ -1,7 +1,6 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   modules: [
-    '@nuxtseo/module',
     '@nuxt/image',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -20,12 +19,6 @@ export default defineNuxtConfig({
       siteUrl: 'https://campanha.softagon.app',
       siteName: 'Construção Chapa Eleitoral - Softagon Sistemas',
     },
-  },
-  site: {
-    url: 'https://campanha.softagon.app',
-    name: 'Construção Chapa Eleitoral',
-    description: 'Softagon Sistemas',
-    defaultLocale: 'pt-br', // not needed if you have @nuxtjs/i18n installed
   },
   imports: {
     dirs: ['types/*.ts', 'store/*.ts', 'types/**/*.ts'],
