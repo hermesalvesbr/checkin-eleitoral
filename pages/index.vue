@@ -31,9 +31,11 @@
         <ChapaCriarPartidos
           v-model="chapasCriadas"
           :cidade="cidadeSelecionada"
-          :key="cidadeSelecionada.id"
         />
       </v-row>
+      <!-- <v-row id="salvar" class="mt-7">
+        <UsuarioSalvar v-model="chapasCriadas" :key="cidadeSelecionada.id" />
+      </v-row> -->
       <v-row id="coeficiente" class="mt-7">
         <ChapaCoeficiente
           :cidade-selecionada="cidadeSelecionada"
@@ -56,7 +58,6 @@
     serializer: StorageSerializers.object,
   })
   const updateKey = ref(0)
-
   watch(
     chapasCriadas,
     () => {
