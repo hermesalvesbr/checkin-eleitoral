@@ -33,9 +33,9 @@
           :cidade="cidadeSelecionada"
         />
       </v-row>
-      <!-- <v-row id="salvar" class="mt-7">
-        <UsuarioSalvar v-model="chapasCriadas" :key="cidadeSelecionada.id" />
-      </v-row> -->
+      <v-row id="salvar" class="mt-7">
+        <UsuarioSalvar v-model="chapasCriadas" :key="cidadeSelecionada.id"  />
+      </v-row>
       <v-row id="coeficiente" class="mt-7">
         <ChapaCoeficiente
           :cidade-selecionada="cidadeSelecionada"
