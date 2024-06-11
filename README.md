@@ -1,4 +1,3 @@
-
 # Registro de Presença em Comícios Eleitorais com Nuxt 3 e Vuetify
 
 ## Descrição

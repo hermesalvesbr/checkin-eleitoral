@@ -5,7 +5,7 @@
     subtitle="Guarde sua chapa para continuar depois"
     title="Salve sua análise"
     :modelValue="dialog"
-  @click="abrirDialogo"
+    @click="abrirDialogo"
   ></v-card>
   <div>
     <UsuarioLogin :modelValue="dialog" @update:modelValue="dialog = $event" />
