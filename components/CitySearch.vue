@@ -1,80 +1,76 @@
 <template>
-    <v-autocomplete
-      clearable
-      :items="cidades"
-      v-model="cityUser"
-      @update:search="onSearchChange"
-      item-title="nome"
-      :return-object="true"
-      class="mx-auto"
-      placeholder="Digite sua CIDADE"
-      outlined
-      dense
-      auto-select-first
-      :hide-no-data="true"
-    ></v-autocomplete>
-  </template>
-  
-  <script setup lang="ts">
+  <v-autocomplete
+    clearable
+    :items="cidades"
+    v-model="cityUser"
+    @update:search="onSearchChange"
+    item-title="nome"
+    :return-object="true"
+    class="mx-auto"
+    placeholder="Digite sua CIDADE"
+    outlined
+    dense
+    auto-select-first
+    :hide-no-data="true"
+  ></v-autocomplete>
+</template>
+
+<script setup lang="ts">
   interface Cidade {
-    id: string;
-    nome: string;
-    uf: string;
-    totalEleitores: number;
-    totalComparecimento: number;
-    vereadores: number;
+    id: string
+    nome: string
+    uf: string
   }
-  
-  const props = defineProps<{ cidade: Cidade | null, initialCityId: string | null }>();
-  const emit = defineEmits<{ (e: 'update:cidade', cidade: Cidade | null): void }>();
-  
-  const busca = ref('');
-  const cidades = ref<Cidade[]>([]);
-  const cityUser = ref<Cidade | null>(props.cidade);
-  const d = new useDirectus();
-  
+
+  const props = defineProps<{
+    cidade: Cidade | null
+    initialCityId: string | null
+  }>()
+  const emit = defineEmits<{
+    (e: 'update:cidade', cidade: Cidade | null): void
+  }>()
+
+  const busca = ref('')
+  const cidades = ref<Cidade[]>([])
+  const cityUser = ref<Cidade | null>(props.cidade)
+  const d = new useDirectus()
+
   function debounce(fn: (...args: any[]) => void, delay: number) {
-    let timeoutId: any;
+    let timeoutId: any
     return (...args: any[]) => {
       if (timeoutId !== undefined) {
-        clearTimeout(timeoutId);
+        clearTimeout(timeoutId)
       }
-      timeoutId = setTimeout(() => fn(...args), delay);
-    };
+      timeoutId = setTimeout(() => fn(...args), delay)
+    }
   }
-  
+
   function onSearchChange(newValue: string) {
-    busca.value = newValue;
-    debouncedCarregarCidades();
+    busca.value = newValue
+    debouncedCarregarCidades()
   }
-  
+
   async function carregarCidades() {
-    if (busca.value.length < 3) return;
-  
+    if (busca.value.length < 3) return
+
     const response = await d.getItems('votantes', {
       search: busca.value,
       fields: [
         'id',
         'cidade',
         'uf',
-        'total_eleitores',
-        'total_comparecimento',
-        'vereadores',
       ],
       limit: 10,
-    });
-  
+    })
+
     cidades.value = response.map((item: any) => ({
       id: item.id,
       nome: `${item.cidade} - ${item.uf}`,
       uf: item.uf,
-      totalEleitores: item.total_eleitores,
-      totalComparecimento: item.total_comparecimento,
-      vereadores: item.vereadores,
-    }));
+    }))
   }
-  const debouncedCarregarCidades = debounce(carregarCidades, 500);
-  
+  const debouncedCarregarCidades = debounce(carregarCidades, 500)
+
   async function carregarCidadeInicial(id: string) {
     const response = await d.getItems('votantes', {
       filter: { id: { _eq: id } },
@@ -82,37 +78,30 @@
         'id',
         'cidade',
         'uf',
-        'total_eleitores',
-        'total_comparecimento',
-        'vereadores',
       ],
       limit: 1,
-    });
-  
+    })
+
     if (response.length > 0) {
-      const cidade = response[0];
+      const cidade = response[0]
       cityUser.value = {
         id: cidade.id,
         nome: `${cidade.cidade} - ${cidade.uf}`,
         uf: cidade.uf,
-        totalEleitores: cidade.total_eleitores,
-        totalComparecimento: cidade.total_comparecimento,
-        vereadores: cidade.vereadores,
-      };
-      emit('update:cidade', cityUser.value);
+      }
+      emit('update:cidade', cityUser.value)
     }
   }
-  
+
   onMounted(() => {
     if (props.initialCityId) {
-      carregarCidadeInicial(props.initialCityId);
+      carregarCidadeInicial(props.initialCityId)
     }
-  });
-  
+  })
+
   watch(cityUser, (newVal) => {
     if (newVal) {
-      emit('update:cidade', newVal);
+      emit('update:cidade', newVal)
     }
-  });
-  </script>
-  
+  })
+</script>

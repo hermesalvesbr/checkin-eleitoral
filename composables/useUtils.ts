@@ -20,6 +20,20 @@ class UtilsEduprime {
       autoClose: 1500,
     })
   }
+  gerarSenhaFacil(base: string): string {
+    // Remove caracteres especiais e espaços
+    const sanitizedBase = base.replace(/[^a-zA-Z0-9]/g, '')
+    const caracteres = '@0123456789'
+    const maxLength = 12
+    let senha = sanitizedBase
+
+    while (senha.length < maxLength) {
+      const randomIndex = Math.floor(Math.random() * caracteres.length)
+      senha += caracteres[randomIndex]
+    }
+
+    return senha
+  }
 
   validateCPF(cpf: string): boolean | string {
     cpf = cpf.replace(/[^\d]/g, '') // Remove caracteres não numéricos

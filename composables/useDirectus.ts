@@ -102,9 +102,7 @@ class useDirectus {
           )
           break
         case 'Value for field "email" in collection "directus_users" has to be unique.':
-          this.utils.notifyError(
-            'O valor para o campo "email" no EduPrime deve ser único.'
-          )
+          this.utils.notifyError('O valor para o campo "email" deve ser único.')
           break
         default:
           this.utils.notifyError(msg)
