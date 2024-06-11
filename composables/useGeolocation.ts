@@ -5,14 +5,15 @@ export async function useGeolocation() {
 
   const getCityByIP = async () => {
     try {
-      const response = await $fetch<{ city: string; region: string }>(
-        'http://ip-api.com/json/'
+      const response = await $fetch<{ city: string, region: string }>(
+        'http://ip-api.com/json/',
       )
       if (response) {
         city = response.city || null
         region = response.region || null
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error fetching location data:', error)
     }
   }

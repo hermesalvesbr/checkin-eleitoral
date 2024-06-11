@@ -1,15 +1,23 @@
+<script lang="ts" setup>
+interface CardData {
+  cidade: string
+  politico: string
+}
+const props = defineProps<{ localidadeDados?: CardData }>()
+</script>
+
 <template>
   <v-row
+    v-if="props.localidadeDados"
     id="localidade"
     class="my-1 d-flex flex-wrap"
-    v-if="props.localidadeDados"
   >
     <v-col cols="6">
       <v-card
+        v-if="props.localidadeDados?.cidade"
         class="d-flex flex-column"
         elevation="10"
         color="surface-variant"
-        v-if="props.localidadeDados?.cidade"
       >
         <v-card-title class="justify-center text-caption text-uppercase">
           Cidade
@@ -19,10 +27,10 @@
         </v-card-text>
       </v-card>
       <v-card
+        v-if="props.localidadeDados?.politico"
         class="d-flex flex-column"
         elevation="10"
         color="secondary"
-        v-if="props.localidadeDados?.politico"
       >
         <v-card-title class="justify-center text-caption text-uppercase">
           Apoiando
@@ -34,11 +42,3 @@
     </v-col>
   </v-row>
 </template>
-
-<script lang="ts" setup>
-  interface CardData {
-    cidade: string
-    politico: string
-  }
-  const props = defineProps<{ localidadeDados?: CardData }>()
-</script>

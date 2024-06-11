@@ -1,7 +1,7 @@
 {
   "name": "campanha-softagona-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -9,8 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"**/*.{js,ts,vue,json,scss,css,md}\""
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@directus/sdk": "^16.1.0",
@@ -22,25 +21,19 @@
     "vue3-toastify": "^0.2.1"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.21.0",
     "@directus/types": "^11.1.3",
-    "@eslint/eslintrc": "^3.1.0",
+    "@nuxt/eslint": "^0.3.13",
     "@nuxt/image": "^1.7.0",
-    "@nuxtjs/eslint-config": "^12.0.0",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.2",
-    "@typescript-eslint/eslint-plugin": "^7.13.0",
-    "@typescript-eslint/parser": "^7.13.0",
-    "@vueuse/core": "^10.10.0",
+    "@vueuse/core": "^10.10.1",
     "csv-parser": "^3.0.0",
     "eslint": "^9.4.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^17.8.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-promise": "^6.2.0",
-    "eslint-plugin-vue": "^9.26.0",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-nuxt": "^4.0.0",
     "nuxt": "^3.12.1",
     "sass": "^1.77.4",
     "ts-node": "^10.9.2",

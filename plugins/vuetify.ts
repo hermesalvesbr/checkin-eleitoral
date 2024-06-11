@@ -8,22 +8,22 @@ export default defineNuxtPlugin((app) => {
   const brasilLightTheme = {
     dark: false,
     colors: {
-      background: '#FFFFFF', // Branco para fundo geral
-      surface: '#FDFDFD', // Uma variação sutil de branco para superfícies
+      'background': '#FFFFFF', // Branco para fundo geral
+      'surface': '#FDFDFD', // Uma variação sutil de branco para superfícies
       'surface-bright': '#FFFFFF',
       'surface-light': '#EEEEEE',
       'surface-variant': '#005CA9', // Azul para variantes de superfície
       'on-surface-variant': '#FDFDFD',
-      primary: '#009B3A', // Verde da bandeira para a cor primária
+      'primary': '#009B3A', // Verde da bandeira para a cor primária
       'primary-darken-1': '#007229', // Uma variação mais escura do verde para hover e foco
-      secondary: '#FFDF00', // Amarelo da bandeira para a cor secundária
+      'secondary': '#FFDF00', // Amarelo da bandeira para a cor secundária
       'secondary-darken-1': '#DBB300', // Uma variação mais escura do amarelo
-      error: '#B00020',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FB8C00',
+      'error': '#B00020',
+      'info': '#2196F3',
+      'success': '#4CAF50',
+      'warning': '#FB8C00',
       // Adicionando azul da esfera da bandeira como uma cor adicional
-      accent: '#3E9ECF', // Um azul claro que lembra a esfera da bandeira
+      'accent': '#3E9ECF', // Um azul claro que lembra a esfera da bandeira
     },
     variables: {
       'border-color': '#000000',

@@ -1,8 +1,8 @@
-export type Pessoa = {
+export interface Pessoa {
   nome: string
   votos: number
 }
-export type Chapa = {
+export interface Chapa {
   cidadeId: number
   nome: string
   valor: string
@@ -10,12 +10,12 @@ export type Chapa = {
   id: number
   pessoas: Pessoa[]
 }
-export type Cidade = {
+export interface Cidade {
   id: number
   nome: string
   uf: string
-  totalEleitores: number
-  totalComparecimento: number
-  chapa: string
-  vereadores: number | null
+  totalEleitores?: number
+  totalComparecimento?: number
+  chapa?: string
+  vereadores?: number | null
 }

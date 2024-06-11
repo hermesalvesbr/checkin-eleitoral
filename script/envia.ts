@@ -1,18 +1,9 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import csv from 'csv-parser'
 import {
-  createDirectus,
   createItem,
-  createUser,
-  readItems,
-  readItem,
-  rest,
-  staticToken,
-  uploadFiles,
-  passwordRequest,
-  passwordReset,
-  readUsers,
 } from '@directus/sdk'
+
 interface Eleitorado {
   UF: string
   Cidade: string
@@ -30,7 +21,7 @@ fs.createReadStream('../public/eleitorado.csv')
       UF: data.UF,
       Cidade: data.Cidade,
       // Garantir que o código é um inteiro
-      Codigo: parseInt(data.Codigo, 10),
+      Codigo: Number.parseInt(data.Codigo, 10),
       // Arredondar o TotalEleitores para o inteiro mais próximo
       TotalEleitores: Math.round(Number(data.TotalEleitores)),
       // Arredondar o TotalComparecimento para o inteiro mais próximo
@@ -41,9 +32,9 @@ fs.createReadStream('../public/eleitorado.csv')
     console.log('Dados do Eleitorado:')
     results.forEach(async (eleitor) => {
       console.log(
-        `${eleitor.UF} - ${eleitor.Cidade} | Código: ${eleitor.Codigo} | Total Eleitores: ${eleitor.TotalEleitores} | Total Comparecimento: ${eleitor.TotalComparecimento}`
+        `${eleitor.UF} - ${eleitor.Cidade} | Código: ${eleitor.Codigo} | Total Eleitores: ${eleitor.TotalEleitores} | Total Comparecimento: ${eleitor.TotalComparecimento}`,
       )
-      let modelo = {
+      const modelo = {
         codigo: eleitor.Codigo,
         cidade: eleitor.Cidade,
         uf: eleitor.UF,
@@ -54,7 +45,8 @@ fs.createReadStream('../public/eleitorado.csv')
       try {
         const result = await directus.request(createItem('votantes', modelo))
         console.log(result)
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Erro ao inserir item:', error)
       }
     })
