@@ -2,40 +2,44 @@
 import type { Chapa } from '~/types'
 
 const d = new useDirectus()
+const chapas = ref<Chapa[]>([])
+const cidadesUnicas = ref<string[]>([])
 
-const chapas = ref([])
-chapas.value = await d.getItems('chapas')
-
-interface Data {
-  data: Array<{ chapas: Chapa[] }>
+async function fetchChapas() {
+  const data = await d.getItems('chapas', {
+    fields: ['cidade.*', 'usuario.*', 'chapas', 'date_created', 'id'],
+  })
+  chapas.value = data
+  cidadesUnicas.value = extrairCidadesUnicas(data)
 }
 
-function groupByCidadeId(chapas: Chapa[]) {
-  console.log(chapas)
-  return chapas.reduce((acc, curr) => {
-    curr.chapas.forEach((chapa) => {
-      if (!acc[chapa.cidadeId]) {
-        acc[chapa.cidadeId] = []
-      }
-      acc[chapa.cidadeId].push(chapa)
-    })
-    return acc
-  }, {} as { [key: string]: Chapa[] })
+function extrairCidadesUnicas(dados: any[]): string[] {
+  const cidadeIds = new Set<string>()
+
+  dados.forEach((item) => {
+    if (Array.isArray(item.chapas)) {
+      item.chapas.forEach((chapa: { cidadeId: string }) => {
+        cidadeIds.add(chapa.cidadeId)
+      })
+    }
+  })
+
+  return Array.from(cidadeIds)
 }
 
-const groupedData = groupByCidadeId(chapas.value)
+fetchChapas()
 </script>
 
 <template>
   <div>
-    {{ groupedData }}
+    {{ cidadesUnicas }}
     <v-card>
       <v-card-title> Lista de Cidades </v-card-title>
       <v-card-text>
         <v-list>
-          <!-- <v-list-item v-for="cidade in chapas" :key="cidade.id">
-            <v-list-item-title>{{ cidade.nome }}</v-list-item-title>
-          </v-list-item> -->
+          <v-list-item v-for="cidadeId in cidadesUnicas" :key="cidadeId">
+            <v-list-item-title>{{ cidadeId }}</v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-card-text>
     </v-card>

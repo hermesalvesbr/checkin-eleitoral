@@ -20,6 +20,8 @@ export default defineNuxtConfig({
       apiToken: process.env.NUXT_PUBLIC_API_TOKEN || '',
       siteUrl: 'https://campanha.softagon.app',
       siteName: 'Construção Chapa Eleitoral - Softagon Sistemas',
+      googleapis: process.env.GOOGLE_API_KEY || '',
+      googlecx: process.env.GOOGLE_CX || '',
     },
   },
   imports: {
