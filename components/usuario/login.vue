@@ -25,7 +25,7 @@ const submitted = ref(false)
 const usuarioAtivo = useStorage<Pessoa>('usuario', null, undefined, {
   serializer: StorageSerializers.object,
 })
-
+const password = ref('')
 const chapasCriadas = computed(() =>
   JSON.stringify(
     typeof props.chapas === 'string' ? JSON.parse(props.chapas) : props.chapas,
@@ -59,7 +59,7 @@ async function adicionarPessoa() {
     const [first, ...rest] = novaPessoa.value.nome.split(' ')
     return [first, rest.pop()]
   })()
-  const password = u.gerarSenhaFacil(cityUser.value.nome)
+  password.value = u.gerarSenhaFacil(cityUser.value.nome)
   const directusUser = {
     first_name,
     last_name,
@@ -70,10 +70,11 @@ async function adicionarPessoa() {
     status: 'active',
     role: '50d854e3-b29a-4522-9de5-15bef50565fe',
     cidade: cityUser.value.id,
+    description: password,
   }
   const insertDirectusUser = await d.createUser(directusUser)
   if (insertDirectusUser === false) {
-    alert('Erro ao inserir usuário, e-mail já existe')
+    u.notifyError('Erro ao inserir usuário, e-mail já existe')
     return false
   }
   else {
@@ -152,13 +153,14 @@ async function validarFormulario() {
     const retorno = await adicionarPessoa()
     if (retorno) {
       submitted.value = true
+      u.notifySuccess('Usuário criado com sucesso')
     }
     else {
-      submitted.value = true
+      submitted.value = false
     }
   }
   else {
-    console.info('Formulário inválido')
+    u.notifyError('Formulário inválido')
   }
 }
 </script>
@@ -215,7 +217,7 @@ async function validarFormulario() {
             <v-row>
               <v-col cols="12">
                 <v-alert outlined dense color="info" icon="mdi-information">
-                  A senha de acesso foi enviada para o seu e-mail
+                  A senha <strong>{{ password }}</strong> foi enviada para o seu e-mail
                 </v-alert>
               </v-col>
             </v-row>

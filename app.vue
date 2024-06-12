@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import 'vue3-toastify/dist/index.css'
+
 useSeoMeta({
   title: 'Construa sua Chapa Eleitoral',
   ogTitle: 'Construa a Chapa Eleitoral',

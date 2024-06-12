@@ -6,10 +6,10 @@ const props = defineProps<{
   modelValue: Chapa[]
   cidade: any
 }>()
+const userID = ref('')
 const usuarioCriado = useStorage('usuario', null, undefined, {
   serializer: StorageSerializers.object,
 })
-const userID = ref('')
 userID.value = usuarioCriado.value && usuarioCriado.value.id ? usuarioCriado.value.id : ''
 
 const dialog = ref(false)
@@ -25,6 +25,10 @@ async function gerenciaChapa() {
 }
 
 async function salvarChapa() {
+  const usuarioCriado = useStorage('usuario', null, undefined, {
+    serializer: StorageSerializers.object,
+  })
+  userID.value = usuarioCriado.value && usuarioCriado.value.id ? usuarioCriado.value.id : ''
   return await d.createItem('chapas', {
     cidade: props.cidade,
     usuario: userID.value,
