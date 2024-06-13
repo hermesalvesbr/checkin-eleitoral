@@ -1,0 +1,3 @@
+<template>
+  /dev/null
+</template>

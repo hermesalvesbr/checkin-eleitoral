@@ -1,23 +1,36 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import type { Chapa } from '~/types'
 
 const d = new useDirectus()
 const chapas = ref<Chapa[]>([])
 const cidadesUnicas = ref<string[]>([])
 const loading = ref(true)
+
 async function fetchChapas() {
-  const data = await d.getItems('chapas', {
-    fields: ['cidade.*', 'usuario.*', '*'],
-  })
-  return data
+  try {
+    const data = await d.getItems('chapas', {
+      fields: ['cidade.*', 'usuario.*', '*'],
+    })
+    return data
+  }
+  catch (error) {
+    console.error('Erro ao buscar chapas:', error)
+    return []
+  }
 }
 
-function extrairCidadesUnicas(dados: any[]): string[] {
+function extrairCidadesUnicas(data: any[]): string[] {
   const cidadeIds = new Set<string>()
 
-  dados.forEach((item) => {
+  data.forEach((item) => {
     if (Array.isArray(item.chapas)) {
       item.chapas.forEach((chapa: { cidadeId: string }) => {
+        cidadeIds.add(chapa.cidadeId)
+      })
+    }
+    else {
+      item.chapas.chapas.forEach((chapa: { cidadeId: string }) => {
         cidadeIds.add(chapa.cidadeId)
       })
     }
@@ -25,39 +38,23 @@ function extrairCidadesUnicas(dados: any[]): string[] {
 
   return Array.from(cidadeIds)
 }
-function countChapasByCidadeId(chapas: any[], cidadeId: string): number {
-  let count = 0
-  chapas.forEach((item) => {
-    if (Array.isArray(item.chapas)) {
-      item.chapas.forEach((chapa: { cidadeId: string }) => {
-        if (chapa.cidadeId === cidadeId) {
-          count++
-        }
-      })
-    }
-  })
-  return count
-}
 
-chapas.value = await fetchChapas()
-cidadesUnicas.value = extrairCidadesUnicas(chapas.value)
-
-setTimeout(() => {
+onMounted(async () => {
+  chapas.value = await fetchChapas()
+  cidadesUnicas.value = extrairCidadesUnicas(chapas.value)
   loading.value = false
-}, 1000)
+})
 </script>
 
 <template>
   <div>
-    {{ chapas }}
     <v-card :loading="loading">
-      <v-card-title> Lista de Cidades </v-card-title>
+      <v-card-title>Lista de Cidades</v-card-title>
       <v-card-text>
         <v-list>
-          <v-list-item v-for="cidadeId in cidadesUnicas" :key="cidadeId">
+          <v-list-item v-for="item in cidadesUnicas" :key="item">
             <v-list-item-title>
-              {{ cidadeId }}
-              {{ countChapasByCidadeId(chapas, cidadeId) }}
+              <CidadeListar :key="item" :chapas="chapas" :cidade="item" />
             </v-list-item-title>
           </v-list-item>
         </v-list>

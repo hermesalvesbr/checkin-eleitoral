@@ -2,6 +2,7 @@ import {
   createDirectus,
   createItem,
   createUser,
+  importFile,
   passwordRequest,
   passwordReset,
   readItem,
@@ -132,8 +133,14 @@ class useDirectus {
     }
   }
 
+  async importAFile(file_url: string, file_object?: any) {
+    const result = await this.directus.request(importFile(file_url, file_object))
+    return result
+  }
+
   async requestPassword(email: string): Promise<any> {
     console.log('Email:', email)
+    // eslint-disable-next-line regexp/no-unused-capturing-group
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-z]{2,7}$/i
     if (!emailRegex.test(email)) {
       console.error('Email inválido:', email)

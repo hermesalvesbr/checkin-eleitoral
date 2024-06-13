@@ -14,6 +14,7 @@ class ImageFetcher {
 
   public async fetchImage(query: string): Promise<string | null> {
     try {
+      console.log('fetchImage', query)
       const { data, error: fetchError }: { data: any, error: any } = await useLazyAsyncData(`fetchImage-${query}`, () =>
         $fetch(`https://www.googleapis.com/customsearch/v1`, {
           params: {

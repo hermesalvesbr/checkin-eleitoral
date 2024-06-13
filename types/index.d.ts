@@ -11,8 +11,10 @@ export interface Chapa {
   pessoas: Pessoa[]
 }
 export interface Cidade {
+  bandeira?: any
   id: number
-  nome: string
+  nome?: string
+  cidade?: string
   uf: string
   totalEleitores?: number
   totalComparecimento?: number
