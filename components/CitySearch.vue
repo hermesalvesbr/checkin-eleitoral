@@ -50,7 +50,6 @@ async function carregarCidades() {
   }))
 }
 
-
 async function carregarCidadeInicial(id: string) {
   const response = await d.getItems('votantes', {
     filter: { id: { _eq: id } },

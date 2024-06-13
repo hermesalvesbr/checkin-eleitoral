@@ -44,7 +44,7 @@ function ajustarImpar() {
 function calcular() {
   if (numeroVereadores.value > 0) {
     coeficienteEleitoral.value
-        = cidade.value.totalComparecimento / numeroVereadores.value
+        = (cidade.value.totalComparecimento ?? 0) / numeroVereadores.value
   }
 }
 async function getVereadores(cidadeId: number): Promise<number> {
@@ -58,10 +58,9 @@ async function getVereadores(cidadeId: number): Promise<number> {
 function calcularVotosPorCandidato(): number {
   const chapas = chapasDaCidade.value.length
   const candidatos = chapas * limiteChapa.value
-  const minVot = cidade.value.totalComparecimento / (candidatos / 2)
+  const minVot = (cidade.value.totalComparecimento ?? 0) / (candidatos / 2)
   return minVot
 }
-
 watch(
   () => chapasDaCidade.value.length,
   () => {
@@ -143,7 +142,7 @@ onMounted(async () => {
         </v-card>
       </v-dialog>
     </v-row>
-    <v-row v-if="numeroVereadores != 0" id="coeficiente" class="justify-start">
+    <v-row v-if="numeroVereadores !== 0" id="coeficiente" class="justify-start">
       <v-divider :thickness="2" />
       <v-col cols="12">
         <v-list>
@@ -188,7 +187,6 @@ onMounted(async () => {
             target="_blank"
             :href="`https://wa.me/+5581989531156?text=Ol%C3%A1%2C%20Quantidade%20de%20vereadores%20em%20${cidade.nome}%20est%C3%A1%20incorreto.`"
             class="text-decoration-none"
-            @click=""
           >informe agora</a>.
         </v-col>
       </v-col>
