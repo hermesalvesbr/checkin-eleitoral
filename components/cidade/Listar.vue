@@ -12,6 +12,7 @@ const props = defineProps({
   },
 })
 const d = new useDirectus()
+const u = new useUtils()
 const cidadeId = computed(() => props.cidade)
 const chapas = computed(() => props.chapas)
 const cidadeInfo = ref()
@@ -25,28 +26,7 @@ function getCidadeByCidadeId(data: any[], cidadeId: string): Cidade | null {
   }
   return null
 }
-function extractChapasByCidadeId(data: any[], targetCidadeId: string): Chapa[] {
-  const result: Chapa[] = []
 
-  data.forEach((item) => {
-    if (Array.isArray(item.chapas)) {
-      item.chapas.forEach((chapa: any) => {
-        if (chapa.cidadeId === targetCidadeId) {
-          result.push(chapa)
-        }
-      })
-    }
-    else {
-      item.chapas.chapas.forEach((chapa: any) => {
-        if (chapa.cidadeId === targetCidadeId) {
-          result.push(chapa)
-        }
-      })
-    }
-  })
-
-  return result
-}
 async function uploadBandeira(imageUrl: string, cidade: Cidade) {
   const fileObject = {
     title: `bandeira de ${cidade.cidade} ${cidade.uf}`,
@@ -80,7 +60,7 @@ onMounted(() => {
   pegaBandeira(cidadeInfo.value)
 })
 
-const filteredChapas = extractChapasByCidadeId(chapas.value, cidadeId.value)
+const filteredChapas = u.extractChapasByCidadeId(chapas.value, cidadeId.value)
 const qtdChapas = filteredChapas.length.toString().padStart(2, '0')
 </script>
 

@@ -1,5 +1,6 @@
 import { toast } from 'vue3-toastify'
 import { DateTime } from 'luxon'
+import type { Chapa } from '~/types'
 
 class UtilsEduprime {
   router: any
@@ -249,6 +250,29 @@ class UtilsEduprime {
         clearTimeout(debounceTimeout)
       debounceTimeout = setTimeout(() => func(...args), delay)
     }
+  }
+
+  extractChapasByCidadeId(data: any[], targetCidadeId: string): Chapa[] {
+    const result: Chapa[] = []
+
+    data.forEach((item) => {
+      if (Array.isArray(item.chapas)) {
+        item.chapas.forEach((chapa: any) => {
+          if (chapa.cidadeId === targetCidadeId) {
+            result.push(chapa)
+          }
+        })
+      }
+      else {
+        item.chapas.chapas.forEach((chapa: any) => {
+          if (chapa.cidadeId === targetCidadeId) {
+            result.push(chapa)
+          }
+        })
+      }
+    })
+
+    return result
   }
 }
 export default UtilsEduprime

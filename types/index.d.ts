@@ -3,6 +3,7 @@ export interface Pessoa {
   votos: number
 }
 export interface Chapa {
+  cidade: any
   cidadeId: number
   nome: string
   valor: string
@@ -12,7 +13,7 @@ export interface Chapa {
 }
 export interface Cidade {
   bandeira?: any
-  id: number
+  id: string
   nome?: string
   cidade?: string
   uf: string
