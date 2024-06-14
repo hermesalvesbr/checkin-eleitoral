@@ -5,6 +5,8 @@ import {
   importFile,
   passwordRequest,
   passwordReset,
+  readAssetRaw,
+  readFile,
   readItem,
   readItems,
   readUsers,
@@ -135,6 +137,12 @@ class useDirectus {
 
   async importAFile(file_url: string, file_object?: any) {
     const result = await this.directus.request(importFile(file_url, file_object))
+    return result
+  }
+
+  async readFiles(fileID: string) {
+    const result = await this.directus.request(readFile(fileID, {
+    }))
     return result
   }
 

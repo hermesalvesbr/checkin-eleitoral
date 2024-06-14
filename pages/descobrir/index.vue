@@ -47,18 +47,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <v-card :loading="loading">
-      <v-card-title>Lista de Cidades</v-card-title>
-      <v-card-text>
-        <v-list>
-          <v-list-item v-for="item in cidadesUnicas" :key="item">
-            <v-list-item-title>
-              <CidadeListar :key="item" :chapas="chapas" :cidade="item" />
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-card-text>
-    </v-card>
-  </div>
+  <v-container class="pa-6 pa-md-12" fluid>
+    <p class="font-weight-medium text-primary">
+      Chapas Eleitorais de Cidades
+    </p>
+
+    <p class="mt-2 text-h6 font-weight-bold text-sm-h4">
+      Cidades que já possuem ánalise
+    </p>
+    <p class="mt-4 mb-6 text-body-1">
+      Bem-vindo! Explore as cidades onde usuários já fizeram previsões para vereadores, criando coligações e estimando votos. Esta ferramenta colaborativa é pública e os dados são responsabilidade dos usuários. Participe, compartilhe suas ideias e veja a soma dos votos por partido, ajudando a moldar o futuro da sua cidade!
+    </p>
+
+    <v-row justify="center">
+      <v-progress-linear v-if="loading" indeterminate />
+      <v-list>
+        <v-list-item v-for="item in cidadesUnicas" :key="item">
+          <v-list-item-title>
+            <CidadeListar :key="item" :chapas="chapas" :cidade="item" />
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-row>
+  </v-container>
 </template>

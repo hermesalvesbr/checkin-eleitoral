@@ -12,6 +12,11 @@ const props = defineProps({
   },
 })
 const d = new useDirectus()
+const cidadeId = computed(() => props.cidade)
+const chapas = computed(() => props.chapas)
+const cidadeInfo = ref()
+const eleitores = ref()
+
 function getCidadeByCidadeId(data: any[], cidadeId: string): Cidade | null {
   for (const item of data) {
     if (item.cidade.id === cidadeId) {
@@ -49,7 +54,7 @@ async function uploadBandeira(imageUrl: string, cidade: Cidade) {
     description: cidade,
     location: `${cidade.cidade}, ${cidade.uf}`,
   }
-  const recemSalvo = d.importAFile(imageUrl, fileObject)
+  const recemSalvo = await d.importAFile(imageUrl, fileObject)
   return recemSalvo.id || null
 }
 
@@ -62,17 +67,12 @@ async function pegaBandeira(cidade: Cidade) {
         const fileId = await uploadBandeira(imageUrl, cidade)
         if (fileId) {
           cidade.bandeira = fileId
-          await d.updateItem('cidades', cidade.id, { bandeira: fileId })
+          await d.updateItem('votantes', cidade.id, { bandeira: fileId })
         }
       }
     }, 3000)
   }
 }
-
-const cidadeId = computed(() => props.cidade)
-const chapas = computed(() => props.chapas)
-const cidadeInfo = ref()
-const eleitores = ref()
 
 onMounted(() => {
   cidadeInfo.value = getCidadeByCidadeId(chapas.value, cidadeId.value)
@@ -112,11 +112,11 @@ const qtdChapas = filteredChapas.length.toString().padStart(2, '0')
         </div>
 
         <v-avatar
-          class="ma-3"
-          rounded="0"
+          class="ma-1 mt-4"
+          rounded="1"
           size="125"
         >
-          <v-img src="https://cdn.vuetifyjs.com/images/cards/foster.jpg" />
+          <v-img :src="`https://eleicoes.softagon.app/assets/${cidadeInfo?.bandeira}/bandeira-${cidadeInfo?.cidade}.webp?fit=cover&width=125&height=125&quality=80`" />
         </v-avatar>
       </div>
     </v-card>

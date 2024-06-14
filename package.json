@@ -16,12 +16,12 @@
     "@mdi/font": "^7.4.47",
     "date-fns": "^3.6.0",
     "luxon": "^3.4.4",
-    "vue": "^3.4.27",
+    "vue": "^3.4.28",
     "vue-router": "^4.3.3",
     "vue3-toastify": "^0.2.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.0",
+    "@antfu/eslint-config": "^2.21.1",
     "@directus/types": "^11.1.3",
     "@nuxt/eslint": "^0.3.13",
     "@nuxt/image": "^1.7.0",
@@ -29,15 +29,15 @@
     "@nuxtjs/eslint-module": "^4.1.0",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.2",
-    "@vueuse/core": "^10.10.1",
+    "@vueuse/core": "^10.11.0",
     "csv-parser": "^3.0.0",
     "eslint": "^9.4.0",
     "eslint-define-config": "^2.1.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "nuxt": "^3.12.1",
-    "sass": "^1.77.4",
+    "sass": "^1.77.5",
     "ts-node": "^10.9.2",
     "vite-plugin-vuetify": "^2.0.3",
-    "vuetify": "^3.6.8"
+    "vuetify": "^3.6.9"
   }
 }
