@@ -58,7 +58,7 @@ onMounted(async () => {
     <v-row justify="center">
       <v-list lines="three">
         <template v-for="registro in chapasFiltradas" :key="registro.id">
-          <v-list-item :to="`/chapa/${registro.id}`" nav>
+          <v-list-item :to="`/chapa/${registro.id}/${localidade.id}`" nav>
             <v-list-item-title>{{ registro.usuario?.first_name || 'Usuário desconhecido' }}</v-list-item-title>
             <v-list-item-subtitle>
               Quantidade de chapas: {{ registro.chapas.length }}<br>

@@ -5,7 +5,6 @@ import {
   importFile,
   passwordRequest,
   passwordReset,
-  readAssetRaw,
   readFile,
   readItem,
   readItems,
