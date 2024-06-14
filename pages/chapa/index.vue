@@ -28,6 +28,7 @@ function debounce(fn: (...args: any[]) => void, delay: number) {
     timeoutId = setTimeout(() => fn(...args), delay)
   }
 }
+const debouncedCarregarCidades = debounce(carregarCidades, 500)
 function onSearchChange(newValue: string) {
   busca.value = newValue
   debouncedCarregarCidades()
@@ -59,7 +60,6 @@ async function carregarCidades() {
     vereadores: item.vereadores,
   }))
 }
-const debouncedCarregarCidades = debounce(carregarCidades, 500)
 </script>
 
 <template>

@@ -2,7 +2,6 @@
 import type { Chapa, Cidade } from '~/types'
 
 const d = new useDirectus()
-const u = new useUtils()
 const localidade = ref<Cidade | null>()
 const cidadeId = ref('') as Ref<string>
 const chapas = ref([])
@@ -38,7 +37,9 @@ onMounted(async () => {
     fields: ['cidade.*', 'usuario.*', '*'],
   })
 
-  chapasFiltradas.value = filtrarRegistrosPorCidade(chapas.value, cidadeId.value)
+  chapasFiltradas.value = filtrarRegistrosPorCidade(chapas.value, cidadeId.value).sort((a, b) => {
+    return new Date(b.date_updated).getTime() - new Date(a.date_updated).getTime()
+  })
 })
 </script>
 
@@ -55,9 +56,18 @@ onMounted(async () => {
       Você está vendo as análises eleitorais de {{ localidade.cidade }}! Aqui, usuários fizeram previsões para vereadores, detalhando cada chapa e candidato. As análises são responsabilidade dos usuários, tornando {{ localidade.cidade }} uma cidade de colaboração e participação ativa. Contribua com suas próprias previsões!
     </p>
     <v-row justify="center">
-      Lista de Araripina
-
-      {{ chapasFiltradas }}
+      <v-list lines="three">
+        <template v-for="registro in chapasFiltradas" :key="registro.id">
+          <v-list-item :to="`/chapa/${registro.id}`" nav>
+            <v-list-item-title>{{ registro.usuario?.first_name || 'Usuário desconhecido' }}</v-list-item-title>
+            <v-list-item-subtitle>
+              Quantidade de chapas: {{ registro.chapas.length }}<br>
+              Atualizado em: {{ new Date(registro.date_updated).toLocaleString() }}
+            </v-list-item-subtitle>
+          </v-list-item>
+          <v-divider v-if="registro !== chapasFiltradas[chapasFiltradas.length - 1]" />
+        </template>
+      </v-list>
     </v-row>
   </v-container>
 </template>

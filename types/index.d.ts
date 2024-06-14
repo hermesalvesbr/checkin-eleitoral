@@ -3,6 +3,7 @@ export interface Pessoa {
   votos: number
 }
 export interface Chapa {
+  date_updated: string | number | Date
   cidade: any
   cidadeId: number
   nome: string
