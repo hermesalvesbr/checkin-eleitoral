@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import type { Chapa } from '~/types'
 
 const d = new useDirectus()
