@@ -61,17 +61,21 @@ async function carregarCidades() {
     vereadores: item.vereadores,
   }))
 }
+function removerAcentos(texto: string): string {
+  return texto.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
+}
 function converterParaChapas(candidatos: any[]) {
   const partidosMap: { [key: string]: Chapa } = {}
 
   candidatos.forEach((candidato) => {
     const partido = candidato.SG_PARTIDO
+    const partidoLogo = removerAcentos(candidato.SG_PARTIDO)
     if (!partidosMap[partido]) {
       partidosMap[partido] = {
         cidadeId: cidadeSelecionada.value?.id || '',
         nome: `${candidato.SG_PARTIDO} - ${candidato.NR_PARTIDO}`,
         valor: candidato.SG_PARTIDO,
-        logo: `/partido/${candidato.SG_PARTIDO}.png`,
+        logo: `/partido/${partidoLogo}.png`,
         id: Date.now() + Math.random(),
         pessoas: [],
       }
