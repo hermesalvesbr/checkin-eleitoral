@@ -128,7 +128,7 @@ watch(cidadeSelecionada, async () => {
         Chapa eleitoral da sua Cidade
       </h1>
       <h2 class="text-h6 pl-2">
-        informe os vereadores por partido
+        calculadora de votos para vereador
       </h2>
     </v-row>
     <v-row justify="center">
