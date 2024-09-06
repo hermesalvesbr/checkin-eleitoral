@@ -54,12 +54,67 @@ async function carregarCidades() {
   cidades.value = response.map((item: any) => ({
     id: item.id,
     nome: `${item.cidade} - ${item.uf}`,
+    cidade: item.cidade,
     uf: item.uf,
     totalEleitores: item.total_eleitores,
     totalComparecimento: item.total_comparecimento,
     vereadores: item.vereadores,
   }))
 }
+function converterParaChapas(candidatos: any[]) {
+  const partidosMap: { [key: string]: Chapa } = {}
+
+  candidatos.forEach((candidato) => {
+    const partido = candidato.SG_PARTIDO
+    if (!partidosMap[partido]) {
+      partidosMap[partido] = {
+        cidadeId: cidadeSelecionada.value?.id || '',
+        nome: `${candidato.SG_PARTIDO} - ${candidato.NR_PARTIDO}`,
+        valor: candidato.SG_PARTIDO,
+        logo: `/partido/${candidato.SG_PARTIDO}.png`,
+        id: Date.now() + Math.random(),
+        pessoas: [],
+      }
+    }
+
+    partidosMap[partido].pessoas.push({
+      nome: candidato.NM_URNA_CANDIDATO,
+      votos: '99',
+    })
+  })
+
+  return Object.values(partidosMap)
+}
+
+async function getCandidatosByMunicipio(cidade: string, uf: string) {
+  const response = await d.getItems('candidatos', { filter:
+    {
+      NM_UE: cidade,
+      SG_UF: uf,
+      DS_CARGO: 'VEREADOR',
+    },
+  })
+  return response
+}
+watch(cidadeSelecionada, async () => {
+  if (cidadeSelecionada.value) {
+    const chapasExistentes = chapasCriadas.value.filter(chapa => chapa.cidadeId === cidadeSelecionada.value?.id)
+
+    // Se todas as chapas existentes tiverem pessoas, não faz a chamada
+    const existeChapaSemPessoas = chapasExistentes.some(chapa => chapa.pessoas.length === 0)
+
+    if (existeChapaSemPessoas || chapasExistentes.length === 0) {
+      // Caso exista alguma chapa sem pessoas, ou se não houver chapas criadas para a cidade
+      const retorno = await getCandidatosByMunicipio(
+        cidadeSelecionada.value.cidade,
+        cidadeSelecionada.value.uf,
+      )
+
+      const chapas = converterParaChapas(retorno)
+      chapasCriadas.value = chapas
+    }
+  }
+})
 </script>
 
 <template>
@@ -68,7 +123,7 @@ async function carregarCidades() {
       <h1 class="text-h5">
         Chapa eleitoral da sua Cidade
       </h1>
-      <h2 class="text-h6">
+      <h2 class="text-h6 pl-2">
         informe os vereadores por partido
       </h2>
     </v-row>

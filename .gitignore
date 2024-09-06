@@ -62,3 +62,9 @@ yarn.lock
 # Ignore .env files
 .env
 .env.*.env
+
+# Ignorar todos os arquivos .csv
+*.csv
+
+# Ignorar todos os arquivos .zip
+*.zip

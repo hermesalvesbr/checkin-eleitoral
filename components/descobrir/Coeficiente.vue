@@ -87,7 +87,7 @@ onMounted(async () => {
         prepend-icon="mdi-vote"
         rel="noopener"
         subtitle="Informe o número de vereadores"
-        title="Coeficiente eleitoral"
+        title="Quociente eleitoral"
         @click="solicitarNumeroVereadores"
       />
     </v-row>
@@ -100,7 +100,7 @@ onMounted(async () => {
         <v-card>
           <v-toolbar color="primary" dark>
             <v-toolbar-title class="text-nowrap">
-              Coeficiente eleitoral
+              Quociente eleitoral
             </v-toolbar-title>
             <v-spacer />
             <v-btn icon @click="dialog = false">
@@ -147,7 +147,7 @@ onMounted(async () => {
       <v-col cols="12">
         <v-list>
           <v-list-subheader class="text-caption text-uppercase">
-            Coeficiente eleitoral
+            Quociente eleitoral
             <span class="text-lowercase">(estimativa)</span>
           </v-list-subheader>
           <v-list-item color="primary">

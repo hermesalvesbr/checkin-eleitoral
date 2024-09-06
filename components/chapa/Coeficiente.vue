@@ -12,12 +12,11 @@ const dialog = ref(false)
 const numeroVereadores = ref<number>(0)
 const coeficienteEleitoral = ref(0)
 const minimoVotos = ref(0)
-const limiteChapa = computed(() => {
-  return numeroVereadores.value + 1
-})
+const limiteChapa = computed(() => numeroVereadores.value + 1)
 const chapasDaCidade = computed(() =>
   props.modelValue.filter(chapa => chapa.cidadeId === cidade.value.id),
 )
+const totalComparecimento = computed(() => cidade.value.totalComparecimento)
 
 function solicitarNumeroVereadores() {
   dialog.value = true
@@ -32,6 +31,7 @@ function salvarInformacoes() {
     dialog.value = false
   }
 }
+
 function ajustarImpar() {
   let num = numeroVereadores.value || 9
   if (num % 2 === 0) {
@@ -41,12 +41,7 @@ function ajustarImpar() {
   }
   numeroVereadores.value = num
 }
-function calcular() {
-  if (numeroVereadores.value > 0) {
-    coeficienteEleitoral.value
-        = (cidade.value.totalComparecimento ?? 0) / numeroVereadores.value
-  }
-}
+
 async function getVereadores(cidadeId: number): Promise<number> {
   const response = await d.getItem('votantes', cidadeId, {
     fields: ['vereadores'],
@@ -55,24 +50,107 @@ async function getVereadores(cidadeId: number): Promise<number> {
   return response.vereadores
 }
 
-function calcularVotosPorCandidato(): number {
-  const chapas = chapasDaCidade.value.length
-  const candidatos = chapas * limiteChapa.value
-  const minVot = (cidade.value.totalComparecimento ?? 0) / (candidatos / 2)
-  return minVot
+// Calcula o coeficiente eleitoral (votos válidos / número de vereadores)
+function calcularCoeficienteEleitoral(totalVotos: number, vagas: number): number {
+  return vagas > 0 ? totalVotos / vagas : 0
+}
+
+function calcularTotalVotosPartido(chapas: Chapa[]): number {
+  return chapas.reduce((total, chapa) => {
+    const votosChapa = chapa.pessoas.reduce((soma, pessoa) => soma + Number(pessoa.votos), 0)
+    return total + votosChapa
+  }, 0)
+}
+
+function calcularMinimoVotosPorCandidato(votosPartido: number, coefEleitoral: number): number {
+  if (coefEleitoral === 0)
+    return 0 // Evitar divisões por zero
+  const minimoVotos = votosPartido / coefEleitoral
+  // Evitar valores excessivamente baixos e aplicar um limite inferior razoável
+  return minimoVotos < 100 ? 100 : minimoVotos
+}
+const resumoVereador = ref()
+
+const podeResumir = ref()
+function calcularQuocientePartidario(chapas: Chapa[], numeroVagas: number): string {
+  // Função para somar os votos de cada chapa
+  function calcularTotalVotosPartido(chapa: Chapa): number {
+    return chapa.pessoas.reduce((total, pessoa) => total + Number(pessoa.votos), 0)
+  }
+
+  // Calcular o total de votos de todas as chapas
+  const totalVotos = chapas.reduce((total, chapa) => total + calcularTotalVotosPartido(chapa), 0)
+
+  // Cálculo do quociente eleitoral (total de votos / número de vagas)
+  const quocienteEleitoral = totalVotos / numeroVagas
+
+  // Calcular o quociente partidário para cada partido
+  const quocientesPartidarios = chapas.map((chapa) => {
+    const votosPartido = calcularTotalVotosPartido(chapa)
+    const vagas = Math.floor(votosPartido / quocienteEleitoral) // Desprezar a fração
+    return { partido: chapa.valor, vagas }
+  })
+
+  // Construir a string de saída
+  let resultado = `O quociente eleitoral para esta eleição em Araripina, com ${numeroVagas} vagas de vereador, é ${quocienteEleitoral.toFixed(2)} (aproximadamente).\n\n`
+  resultado += 'Com base nisso, o número de vagas a que cada partido tem direito (quociente partidário) é o seguinte:\n\n'
+
+  quocientesPartidarios.forEach(({ partido, vagas }) => {
+    resultado += `${partido}: ${vagas} vagas\n`
+  })
+
+  // Filtrar os partidos com pelo menos uma vaga
+  const partidosComVagas = quocientesPartidarios.filter(qp => qp.vagas > 0).map(qp => qp.partido)
+
+  resultado += `\nOs partidos que têm direito a pelo menos uma vaga são ${partidosComVagas.join(', ')}.`
+  resumoVereador.value = resultado
+  return resultado
+}
+
+function partidosComQuocienteEleitoral(): string[] {
+  const limiteVotos = coeficienteEleitoral.value
+  const chapas = chapasDaCidade.value
+  function calcularTotalVotosPartido(chapa: Chapa): number {
+    return chapa.pessoas.reduce((total, pessoa) => total + Number(pessoa.votos), 0)
+  }
+
+  return chapas
+    .filter(chapa => calcularTotalVotosPartido(chapa) >= limiteVotos)
+    .map(chapa => chapa.valor) // Retorna apenas o nome do partido (valor)
 }
 watch(
   () => chapasDaCidade.value.length,
   () => {
-    minimoVotos.value = calcularVotosPorCandidato()
+    if (numeroVereadores.value > 0 && coeficienteEleitoral.value > 0) {
+      const totalVotosPartido = calcularTotalVotosPartido(chapasDaCidade.value)
+      minimoVotos.value = calcularMinimoVotosPorCandidato(totalVotosPartido, coeficienteEleitoral.value)
+      console.log('Mínimo de votos atualizado:', minimoVotos.value)
+      calcularQuocientePartidario(chapasDaCidade.value, numeroVereadores.value)
+      podeResumir.value = partidosComQuocienteEleitoral()
+    }
+  },
+  {
+    deep: true,
   },
 )
+
 onMounted(async () => {
   if (cidade.value) {
     numeroVereadores.value = await getVereadores(cidade.value.id)
+    console.log('Número de Vereadores:', numeroVereadores.value)
+
     if (numeroVereadores.value > 0) {
-      calcular()
-      minimoVotos.value = calcularVotosPorCandidato()
+      coeficienteEleitoral.value = calcularCoeficienteEleitoral(totalComparecimento.value, numeroVereadores.value)
+      console.log('Coeficiente Eleitoral calculado:', coeficienteEleitoral.value)
+
+      const totalVotosPartido = calcularTotalVotosPartido(chapasDaCidade.value)
+      console.log('Total de votos por partido:', totalVotosPartido)
+
+      minimoVotos.value = calcularMinimoVotosPorCandidato(totalVotosPartido, coeficienteEleitoral.value)
+      console.log('Mínimo de votos calculado:', minimoVotos.value)
+
+      calcularQuocientePartidario(chapasDaCidade.value, numeroVereadores.value)
+      podeResumir.value = partidosComQuocienteEleitoral()
     }
   }
 })
@@ -87,7 +165,7 @@ onMounted(async () => {
         prepend-icon="mdi-vote"
         rel="noopener"
         subtitle="Informe o número de vereadores"
-        title="Coeficiente eleitoral"
+        title="Quociente eleitoral"
         @click="solicitarNumeroVereadores"
       />
     </v-row>
@@ -100,7 +178,7 @@ onMounted(async () => {
         <v-card>
           <v-toolbar color="primary" dark>
             <v-toolbar-title class="text-nowrap">
-              Coeficiente eleitoral
+              Quociente eleitoral
             </v-toolbar-title>
             <v-spacer />
             <v-btn icon @click="dialog = false">
@@ -147,7 +225,7 @@ onMounted(async () => {
       <v-col cols="12">
         <v-list>
           <v-list-subheader class="text-caption text-uppercase">
-            Coeficiente eleitoral
+            Quociente  eleitoral
             <span class="text-lowercase">(estimativa)</span>
           </v-list-subheader>
           <v-list-item color="primary">
@@ -158,18 +236,6 @@ onMounted(async () => {
             <v-list-item-subtitle class="text-caption">
               Votos para a chapa eleger em
               {{ cidade.nome }}
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item color="primary">
-            <v-list-item-title
-              class="text-caption"
-              :class="{ 'font-weight-bold text-red': numeroVereadores === 0 }"
-            >
-              {{ numeroVereadores }} vagas de vereador
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-caption">
-              Candidatos são competitivos apartir de
-              {{ minimoVotos.toFixed(0) }} votos
             </v-list-item-subtitle>
           </v-list-item>
           <v-list-item color="primary">
@@ -190,6 +256,9 @@ onMounted(async () => {
           >informe agora</a>.
         </v-col>
       </v-col>
+      <div v-if="podeResumir.length > 0">
+        <v-alert :text="resumoVereador" class="ma-4" />
+      </div>
     </v-row>
   </v-container>
 </template>

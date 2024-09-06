@@ -11,9 +11,11 @@ export default defineNuxtConfig({
       })
     },
   ],
+
   image: {
     format: ['webp'],
   },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '',
@@ -24,12 +26,15 @@ export default defineNuxtConfig({
       googlecx: process.env.GOOGLE_CX || '',
     },
   },
+
   imports: {
     dirs: ['types/*.ts', 'store/*.ts', 'types/**/*.ts'],
   },
+
   build: {
     transpile: ['vuetify'],
   },
+
   vite: {
     vue: {
       template: {
@@ -37,4 +42,6 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  compatibilityDate: '2024-09-06',
 })
