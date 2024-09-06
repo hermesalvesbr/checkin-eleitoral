@@ -16,8 +16,14 @@ const { modelValue } = defineProps<{
 }>()
 
 const totalDeChapas = computed(() => modelValue.length)
-const totalDePessoas = computed(() =>
-  modelValue.reduce((total, chapa) => total + chapa.pessoas.length, 0),
+const totalDePessoas = ref(0)
+
+watch(
+  () => modelValue,
+  (newVal) => {
+    totalDePessoas.value = newVal.reduce((total, chapa) => total + chapa.pessoas.length, 0)
+  },
+  { deep: true, immediate: true },
 )
 const totalDeVotos = computed(() =>
   modelValue.reduce(
