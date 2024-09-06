@@ -82,7 +82,7 @@ function calcularQuocientePartidario(chapas: Chapa[], numeroVagas: number): stri
   })
 
   // Construir a string de saída
-  let resultado = `O quociente eleitoral para esta eleição em Araripina, com ${numeroVagas} vagas de vereador, é ${quocienteEleitoral.toFixed(2)} (aproximadamente).\n\n`
+  let resultado = `O quociente eleitoral para esta eleição em ${cidade.value.nome}, com ${numeroVagas} vagas de vereador, é ${quocienteEleitoral.toFixed(2)} (aproximadamente).\n\n`
   resultado += 'Com base nisso, o número de vagas a que cada partido tem direito (quociente partidário) é o seguinte:\n\n'
 
   quocientesPartidarios.forEach(({ partido, vagas }) => {
