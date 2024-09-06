@@ -12,7 +12,8 @@ const dialog = ref(false)
 const numeroVereadores = ref<number>(0)
 const coeficienteEleitoral = ref(0)
 const minimoVotos = ref(0)
-const limiteChapa = computed(() => numeroVereadores.value + 1)
+const limiteChapa = computed(() => Number.parseInt(numeroVereadores.value) + 1)
+
 const chapasDaCidade = computed(() =>
   props.modelValue.filter(chapa => chapa.cidadeId === cidade.value.id),
 )
@@ -21,17 +22,6 @@ const totalComparecimento = computed(() => cidade.value.totalComparecimento)
 function solicitarNumeroVereadores() {
   dialog.value = true
 }
-
-function salvarInformacoes() {
-  if (numeroVereadores.value > 0) {
-    calcular()
-    d.updateItem('votantes', cidade.value.id.toString(), {
-      vereadores: numeroVereadores.value,
-    })
-    dialog.value = false
-  }
-}
-
 function ajustarImpar() {
   let num = numeroVereadores.value || 9
   if (num % 2 === 0) {
@@ -118,6 +108,35 @@ function partidosComQuocienteEleitoral(): string[] {
     .filter(chapa => calcularTotalVotosPartido(chapa) >= limiteVotos)
     .map(chapa => chapa.valor) // Retorna apenas o nome do partido (valor)
 }
+
+async function salvarInformacoes() {
+  if (numeroVereadores.value > 0) {
+    const resp = await d.updateItem('votantes', cidade.value.id.toString(), {
+      vereadores: numeroVereadores.value,
+    })
+    dialog.value = false
+    numeroVereadores.value = resp.vereadores
+
+    if (resp?.id) {
+      window.location.reload()
+    }
+  }
+}
+watch(
+  () => numeroVereadores.value,
+  () => {
+    if (numeroVereadores.value > 0 && coeficienteEleitoral.value > 0) {
+      const totalVotosPartido = calcularTotalVotosPartido(chapasDaCidade.value)
+      minimoVotos.value = calcularMinimoVotosPorCandidato(totalVotosPartido, coeficienteEleitoral.value)
+      console.log('Mínimo de votos atualizado:', minimoVotos.value)
+      calcularQuocientePartidario(chapasDaCidade.value, numeroVereadores.value)
+      podeResumir.value = partidosComQuocienteEleitoral()
+    }
+  },
+  {
+    deep: true,
+  },
+)
 watch(
   () => chapasDaCidade.value.length,
   () => {
@@ -256,7 +275,7 @@ onMounted(async () => {
           >informe agora</a>.
         </v-col>
       </v-col>
-      <div v-if="podeResumir.length > 0">
+      <div v-if="podeResumir && podeResumir.length > 0">
         <v-alert :text="resumoVereador" class="ma-4" />
       </div>
     </v-row>
