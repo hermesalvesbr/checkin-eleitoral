@@ -66,6 +66,42 @@ const chapasCriadasComputed = computed(() =>
 )
 
 const nextId = ref(0)
+const panelsAbertos = ref<number[]>([]) // Controla os painéis abertos
+function abrirTodosOsPanels() {
+  // Abrir todos os painéis de uma vez
+  panelsAbertos.value = chapasCriadasComputed.value.map((_, index) => index)
+
+  // Esperar um pequeno tempo para garantir que os painéis sejam abertos antes da impressão
+  setTimeout(() => {
+    const content = document.getElementById('partidos')?.innerHTML // Pega o conteúdo da div 'partidos'
+
+    if (content) {
+      const printWindow = window.open('', '', 'height=600,width=800')
+      printWindow?.document.write(`
+        <html>
+          <head>
+            <title>Visite campanha.softagon.app</title>
+            <style>
+              /* Aqui você pode adicionar estilos adicionais para a impressão */
+              body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+              }
+            </style>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `)
+      printWindow?.document.close()
+      printWindow?.focus()
+      printWindow?.print()
+      printWindow?.close()
+    }
+  }, 500)
+}
+
 function criarChapa() {
   const partidoDetalhes = partidos.find(
     partido => partido.valor === partidoSelecionado.value,
@@ -164,8 +200,14 @@ function confirmarRemocao() {
       :key="chapasCriadasComputed.length"
       v-model="chapasCriadasComputed"
     />
+    <v-row no-gutters class="d-flex justify-end align-center">
+      <v-btn @click="abrirTodosOsPanels">
+        Imprimir Análise
+      </v-btn>
+    </v-row>
+
     <v-row id="partidos">
-      <v-expansion-panels>
+      <v-expansion-panels v-model="panelsAbertos" multiple>
         <v-expansion-panel
           v-for="(chapa, index) in chapasCriadasComputed"
           :key="index"
