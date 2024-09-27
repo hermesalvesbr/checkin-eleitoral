@@ -85,7 +85,6 @@ function abrirTodosOsPanels() {
               /* Estilos básicos para garantir que a impressão seja limpa */
               body {
                 font-family: Arial, sans-serif;
-                margin: 20px;
               }
 
               /* Certifique-se de que os textos e números estão visíveis */
@@ -107,7 +106,6 @@ function abrirTodosOsPanels() {
               /* Expande o conteúdo de cada painel para garantir que ele seja impresso corretamente */
               .v-expansion-panel {
                 border: 1px solid #ddd;
-                margin-bottom: 10px;
               }
 
               /* Ajusta o tamanho das imagens para que fiquem visíveis */
@@ -119,14 +117,13 @@ function abrirTodosOsPanels() {
               /* Garante que os chips e rótulos estejam visíveis e bem formatados */
               .v-chip {
                 display: inline-block;
-                padding: 8px;
                 font-size: 14px;
               }
             </style>
           </head>
           <body>
             ${content}
-            <pre>Não é pesquisa, é uma análise individual especulativa usando a ferramenta https://campanha.softagon.app</pre>
+            <div><strong>Não é uma pesquisa</strong>, é uma análise individual especulativa usando a ferramenta <br/>https://campanha.softagon.app</div>
           </body>
         </html>
       `)
