@@ -82,15 +82,51 @@ function abrirTodosOsPanels() {
           <head>
             <title>Visite campanha.softagon.app</title>
             <style>
-              /* Aqui você pode adicionar estilos adicionais para a impressão */
+              /* Estilos básicos para garantir que a impressão seja limpa */
               body {
                 font-family: Arial, sans-serif;
                 margin: 20px;
+              }
+
+              /* Certifique-se de que os textos e números estão visíveis */
+              h3 {
+                font-size: 18px;
+              }
+
+              /* Esconde elementos desnecessários para impressão */
+              .v-btn, .mdi-close-circle {
+                display: none !important;
+              }
+
+              /* Corrige o alinhamento dos elementos */
+              .v-row, .v-col {
+                display: block;
+                width: 100%;
+              }
+
+              /* Expande o conteúdo de cada painel para garantir que ele seja impresso corretamente */
+              .v-expansion-panel {
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+              }
+
+              /* Ajusta o tamanho das imagens para que fiquem visíveis */
+              img {
+                max-width: 50px;
+                height: auto;
+              }
+
+              /* Garante que os chips e rótulos estejam visíveis e bem formatados */
+              .v-chip {
+                display: inline-block;
+                padding: 8px;
+                font-size: 14px;
               }
             </style>
           </head>
           <body>
             ${content}
+            <pre>Não é pesquisa, é uma análise individual especulativa usando a ferramenta https://campanha.softagon.app</pre>
           </body>
         </html>
       `)
