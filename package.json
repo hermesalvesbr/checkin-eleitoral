@@ -9,7 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "eleicao": "node ./script/eleicaoAtual.js",
+    "fetch-municipios": "node ./script/fetchMunicipiosPorUF.js"
   },
   "dependencies": {
     "@directus/sdk": "^17.0.1",

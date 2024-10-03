@@ -1,0 +1,1360 @@
+{
+  "ues": [
+    {
+      "id": null,
+      "sigla": "BR",
+      "nome": "BRASIL",
+      "regiao": "BR",
+      "cargos": [],
+      "diretorios": [
+        {
+          "codigo": 2,
+          "uf": "BR",
+          "diretorio": "Direção Nacional",
+          "qtdEntregas": 29
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "AC",
+      "nome": "ACRE",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "AC",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 63
+        },
+        {
+          "codigo": 12,
+          "sigla": "AC",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 65
+        },
+        {
+          "codigo": 13,
+          "sigla": "AC",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 2183
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "AC",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 23
+        },
+        {
+          "codigo": 4,
+          "uf": "AC",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 286
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "AL",
+      "nome": "ALAGOAS",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "AL",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 260
+        },
+        {
+          "codigo": 12,
+          "sigla": "AL",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 264
+        },
+        {
+          "codigo": 13,
+          "sigla": "AL",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 5310
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "AL",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 27
+        },
+        {
+          "codigo": 4,
+          "uf": "AL",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 896
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "AM",
+      "nome": "AMAZONAS",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "AM",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 206
+        },
+        {
+          "codigo": 12,
+          "sigla": "AM",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 213
+        },
+        {
+          "codigo": 13,
+          "sigla": "AM",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 7691
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "AM",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 27
+        },
+        {
+          "codigo": 4,
+          "uf": "AM",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 972
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "AP",
+      "nome": "AMAPÁ",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "AP",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 54
+        },
+        {
+          "codigo": 12,
+          "sigla": "AP",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 56
+        },
+        {
+          "codigo": 13,
+          "sigla": "AP",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 1486
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "AP",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 24
+        },
+        {
+          "codigo": 4,
+          "uf": "AP",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 229
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "BA",
+      "nome": "BAHIA",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "BA",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 1149
+        },
+        {
+          "codigo": 12,
+          "sigla": "BA",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 1173
+        },
+        {
+          "codigo": 13,
+          "sigla": "BA",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 32879
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "BA",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 29
+        },
+        {
+          "codigo": 4,
+          "uf": "BA",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 5357
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "CE",
+      "nome": "CEARÁ",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "CE",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 488
+        },
+        {
+          "codigo": 12,
+          "sigla": "CE",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 502
+        },
+        {
+          "codigo": 13,
+          "sigla": "CE",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 12223
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "CE",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 29
+        },
+        {
+          "codigo": 4,
+          "uf": "CE",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2120
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "DF",
+      "nome": "DISTRITO FEDERAL",
+      "regiao": "CENTROOESTE",
+      "cargos": [],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "DF",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 15,
+          "uf": "DF",
+          "diretorio": "Direção Zonal",
+          "qtdEntregas": 19
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "ES",
+      "nome": "ESPÍRITO SANTO",
+      "regiao": "SUDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "ES",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 280
+        },
+        {
+          "codigo": 12,
+          "sigla": "ES",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 285
+        },
+        {
+          "codigo": 13,
+          "sigla": "ES",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 9291
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "ES",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "ES",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1227
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "GO",
+      "nome": "GOIÁS",
+      "regiao": "CENTROOESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "GO",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 644
+        },
+        {
+          "codigo": 12,
+          "sigla": "GO",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 655
+        },
+        {
+          "codigo": 13,
+          "sigla": "GO",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 18668
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "GO",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "GO",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2910
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "MA",
+      "nome": "MARANHÃO",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "MA",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 641
+        },
+        {
+          "codigo": 12,
+          "sigla": "MA",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 651
+        },
+        {
+          "codigo": 13,
+          "sigla": "MA",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 15543
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "MA",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "MA",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2571
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "MG",
+      "nome": "MINAS GERAIS",
+      "regiao": "SUDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "MG",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 2336
+        },
+        {
+          "codigo": 12,
+          "sigla": "MG",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 2365
+        },
+        {
+          "codigo": 13,
+          "sigla": "MG",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 68741
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "MG",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 29
+        },
+        {
+          "codigo": 4,
+          "uf": "MG",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 9654
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "MS",
+      "nome": "MATO GROSSO DO SUL",
+      "regiao": "CENTROOESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "MS",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 234
+        },
+        {
+          "codigo": 12,
+          "sigla": "MS",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 237
+        },
+        {
+          "codigo": 13,
+          "sigla": "MS",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 6897
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "MS",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 25
+        },
+        {
+          "codigo": 4,
+          "uf": "MS",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1029
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "MT",
+      "nome": "MATO GROSSO",
+      "regiao": "CENTROOESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "MT",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 368
+        },
+        {
+          "codigo": 12,
+          "sigla": "MT",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 374
+        },
+        {
+          "codigo": 13,
+          "sigla": "MT",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 10358
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "MT",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 26
+        },
+        {
+          "codigo": 4,
+          "uf": "MT",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1566
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "PA",
+      "nome": "PARÁ",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "PA",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 467
+        },
+        {
+          "codigo": 12,
+          "sigla": "PA",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 484
+        },
+        {
+          "codigo": 13,
+          "sigla": "PA",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 17135
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "PA",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "PA",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2109
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "PB",
+      "nome": "PARAÍBA",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "PB",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 530
+        },
+        {
+          "codigo": 12,
+          "sigla": "PB",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 541
+        },
+        {
+          "codigo": 13,
+          "sigla": "PB",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 9163
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "PB",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 27
+        },
+        {
+          "codigo": 4,
+          "uf": "PB",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1904
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "PE",
+      "nome": "PERNAMBUCO",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "PE",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 523
+        },
+        {
+          "codigo": 12,
+          "sigla": "PE",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 536
+        },
+        {
+          "codigo": 13,
+          "sigla": "PE",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 15002
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "PE",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 29
+        },
+        {
+          "codigo": 4,
+          "uf": "PE",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2270
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "PI",
+      "nome": "PIAUÍ",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "PI",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 496
+        },
+        {
+          "codigo": 12,
+          "sigla": "PI",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 505
+        },
+        {
+          "codigo": 13,
+          "sigla": "PI",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 7977
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "PI",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "PI",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1513
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "PR",
+      "nome": "PARANÁ",
+      "regiao": "SUL",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "PR",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 1139
+        },
+        {
+          "codigo": 12,
+          "sigla": "PR",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 1151
+        },
+        {
+          "codigo": 13,
+          "sigla": "PR",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 31718
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "PR",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "PR",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 4841
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "RJ",
+      "nome": "RIO DE JANEIRO",
+      "regiao": "SUDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "RJ",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 382
+        },
+        {
+          "codigo": 12,
+          "sigla": "RJ",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 387
+        },
+        {
+          "codigo": 13,
+          "sigla": "RJ",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 16812
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "RJ",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "RJ",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1738
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "RN",
+      "nome": "RIO GRANDE DO NORTE",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "RN",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 392
+        },
+        {
+          "codigo": 12,
+          "sigla": "RN",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 393
+        },
+        {
+          "codigo": 13,
+          "sigla": "RN",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 6901
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "RN",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 26
+        },
+        {
+          "codigo": 4,
+          "uf": "RN",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1436
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "RO",
+      "nome": "RONDÔNIA",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "RO",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 169
+        },
+        {
+          "codigo": 12,
+          "sigla": "RO",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 173
+        },
+        {
+          "codigo": 13,
+          "sigla": "RO",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 4532
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "RO",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 23
+        },
+        {
+          "codigo": 4,
+          "uf": "RO",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 699
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "RR",
+      "nome": "RORAIMA",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "RR",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 44
+        },
+        {
+          "codigo": 12,
+          "sigla": "RR",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 43
+        },
+        {
+          "codigo": 13,
+          "sigla": "RR",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 1258
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "RR",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 25
+        },
+        {
+          "codigo": 4,
+          "uf": "RR",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 192
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "RS",
+      "nome": "RIO GRANDE DO SUL",
+      "regiao": "SUL",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "RS",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 1214
+        },
+        {
+          "codigo": 12,
+          "sigla": "RS",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 1230
+        },
+        {
+          "codigo": 13,
+          "sigla": "RS",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 26576
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "RS",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 27
+        },
+        {
+          "codigo": 4,
+          "uf": "RS",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 3792
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "SC",
+      "nome": "SANTA CATARINA",
+      "regiao": "SUL",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "SC",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 842
+        },
+        {
+          "codigo": 12,
+          "sigla": "SC",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 843
+        },
+        {
+          "codigo": 13,
+          "sigla": "SC",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 17933
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "SC",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "SC",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 2637
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "SE",
+      "nome": "SERGIPE",
+      "regiao": "NORDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "SE",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 216
+        },
+        {
+          "codigo": 12,
+          "sigla": "SE",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 218
+        },
+        {
+          "codigo": 13,
+          "sigla": "SE",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 5148
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "SE",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 28
+        },
+        {
+          "codigo": 4,
+          "uf": "SE",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 730
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "SP",
+      "nome": "SÃO PAULO",
+      "regiao": "SUDESTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "SP",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 2107
+        },
+        {
+          "codigo": 12,
+          "sigla": "SP",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 2138
+        },
+        {
+          "codigo": 13,
+          "sigla": "SP",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 74044
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "SP",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 29
+        },
+        {
+          "codigo": 4,
+          "uf": "SP",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 8404
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    },
+    {
+      "id": null,
+      "sigla": "TO",
+      "nome": "TOCANTINS",
+      "regiao": "NORTE",
+      "cargos": [
+        {
+          "codigo": 11,
+          "sigla": "TO",
+          "nome": "Prefeito",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 330
+        },
+        {
+          "codigo": 12,
+          "sigla": "TO",
+          "nome": "Vice-prefeito",
+          "codSuperior": 11,
+          "titular": false,
+          "contagem": 335
+        },
+        {
+          "codigo": 13,
+          "sigla": "TO",
+          "nome": "Vereador",
+          "codSuperior": 0,
+          "titular": false,
+          "contagem": 6527
+        }
+      ],
+      "diretorios": [
+        {
+          "codigo": 3,
+          "uf": "TO",
+          "diretorio": "Direção Estadual/Distrital",
+          "qtdEntregas": 25
+        },
+        {
+          "codigo": 4,
+          "uf": "TO",
+          "diretorio": "Direção Municipal/Comissão Provisória",
+          "qtdEntregas": 1389
+        }
+      ],
+      "codigo": null,
+      "capital": false,
+      "estado": null
+    }
+  ],
+  "eleicao": {
+    "DT_ELEICAO": null,
+    "tp_ABRANGENCIA": "M",
+    "sq_ELEICAO": 2045202024,
+    "cd_ELEICAO": 619,
+    "nr_ANO_REFERENCIA": 2024,
+    "nm_ELEICAO": "Eleições Municipais 2024",
+    "nr_ANO_BASE": 2024,
+    "dt_ELEICAO": null,
+    "tp_ELEICAO": "O",
+    "cd_PLEITO": 452
+  },
+  "anosDeReferencia": null,
+  "resumoCandidaturas": [
+    {
+      "codigo": 11,
+      "sigla": null,
+      "nome": "Prefeito",
+      "codSuperior": 0,
+      "titular": false,
+      "contagem": 15574
+    },
+    {
+      "codigo": 12,
+      "sigla": null,
+      "nome": "Vice-prefeito",
+      "codSuperior": 11,
+      "titular": false,
+      "contagem": 15817
+    },
+    {
+      "codigo": 13,
+      "sigla": null,
+      "nome": "Vereador",
+      "codSuperior": 0,
+      "titular": false,
+      "contagem": 431996
+    }
+  ],
+  "dataBaseUpdate": "03/10/2024 14:54"
+}
