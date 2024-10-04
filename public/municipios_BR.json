@@ -1,0 +1,14 @@
+{
+  "estado": {
+    "id": null,
+    "sigla": "BR",
+    "nome": "BRASIL",
+    "regiao": null,
+    "cargos": null,
+    "diretorios": null,
+    "codigo": "BR",
+    "capital": false,
+    "estado": null
+  },
+  "municipios": []
+}
