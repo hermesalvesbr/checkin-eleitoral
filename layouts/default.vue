@@ -19,6 +19,7 @@ const items = [
   { title: 'Inicial', value: 1, path: '/' },
   { type: 'subheader', title: 'Cidades' },
   { title: 'Descobrir', value: 1, path: '/descobrir' },
+  { title: 'Dinheiro', value: 1, path: '/recebiveis' },
   { type: 'subheader', title: 'Você' },
   { title: 'Suas análises', value: 4, path: '/suas-analises' },
 ]

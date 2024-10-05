@@ -8,8 +8,6 @@ const loading = ref(false)
 const eleicaoData = ref(null)
 
 const cargos = ref([
-  { codigo: 11, nome: 'Prefeito' },
-  { codigo: 12, nome: 'Vice-prefeito' },
   { codigo: 13, nome: 'Vereador' },
 ])
 
@@ -268,7 +266,7 @@ onMounted(() => {
     <!-- Indicador de carregamento -->
     <v-progress-linear v-if="loading" indeterminate color="blue" />
 
-    <v-card v-if="selectedCargo === 13 && Object.keys(vereadoresAgrupadosPorPartido).length > 0">
+    <v-card v-if="selectedCargo === 13 && Object.keys(vereadoresAgrupadosPorPartido).length > 0 && !loading">
       <v-card-title>Total líquido de Recursos Recebidos</v-card-title>
 
       <v-list v-for="(dadosPartido, partido) in vereadoresAgrupadosPorPartido" :key="partido">
