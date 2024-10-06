@@ -88,7 +88,7 @@ function navigateTo(path: string) {
 
         <v-app-bar-title class="text-uppercase">
           <v-btn size="large" to="/">
-            Coligação Municipal
+            Softagon Sistemas
           </v-btn>
         </v-app-bar-title>
 
