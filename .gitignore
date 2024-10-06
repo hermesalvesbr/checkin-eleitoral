@@ -68,3 +68,4 @@ yarn.lock
 
 # Ignorar todos os arquivos .zip
 *.zip
+public/locais/eleitorado_local_votacao_2024.csv

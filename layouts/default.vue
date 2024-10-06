@@ -20,6 +20,7 @@ const items = [
   { type: 'subheader', title: 'Cidades' },
   { title: 'Descobrir', value: 1, path: '/descobrir' },
   { title: 'Dinheiro', value: 1, path: '/recebiveis' },
+  { title: 'Local de votação', value: 1, path: '/locais' },
   { type: 'subheader', title: 'Você' },
   { title: 'Suas análises', value: 4, path: '/suas-analises' },
 ]
