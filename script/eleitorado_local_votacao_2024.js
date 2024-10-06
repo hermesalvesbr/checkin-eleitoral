@@ -4,8 +4,7 @@ import { createReadStream, createWriteStream, promises as fsPromises } from 'nod
 import { resolve } from 'node:path'
 import readline from 'node:readline'
 
-// Tamanho máximo de 40MB em bytes (40 * 1024 * 1024 = 41943040 bytes)
-const MAX_FILE_SIZE = 40 * 1024 * 1024
+const MAX_FILE_SIZE = 24 * 1024 * 1024
 
 // Função principal para separar o CSV por UF e gerar arquivos JSON
 async function separarCSVPorUFEmJSON() {
